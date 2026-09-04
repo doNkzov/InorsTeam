@@ -458,6 +458,12 @@
             flex-shrink: 0;
             margin: 0;
         }
+        .news-item .news-sticker {
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 8px;
+            margin-top: 6px;
+        }
 
         .polls-list { display: flex; flex-direction: column; gap: 0; }
         .poll-item {
@@ -507,6 +513,12 @@
         }
         .poll-item .poll-content .poll-vote-btn:hover {
             text-decoration: underline;
+        }
+        .poll-item .poll-sticker {
+            max-width: 60px;
+            max-height: 60px;
+            border-radius: 8px;
+            margin-top: 6px;
         }
 
         .news-overlay {
@@ -599,6 +611,12 @@
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 14px;
+        }
+        .news-overlay .overlay-news-sticker {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         .poll-overlay {
@@ -803,6 +821,12 @@
             min-width: 80px;
             object-fit: cover;
         }
+        .poll-overlay .overlay-poll-sticker {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
 
         .empty-news {
             padding: 60px 20px;
@@ -837,6 +861,102 @@
         footer a { color: #6a8cff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
+        /* ===== КОММЕНТАРИИ ===== */
+        .comments-section {
+            margin-top: 30px;
+            border-top: 1px solid #2a2a30;
+            padding-top: 20px;
+        }
+        .comments-section .comments-title {
+            font-size: 1.1rem;
+            color: #eee;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .comments-section .comment {
+            background: #12121c;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border: 1px solid #1a1a26;
+        }
+        .comments-section .comment .comment-author {
+            font-weight: 600;
+            color: #6a8cff;
+            font-size: 0.9rem;
+        }
+        .comments-section .comment .comment-time {
+            color: #555;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+        .comments-section .comment .comment-text {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        .comments-section .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .comments-section .comment-form .form-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .comments-section .comment-form input,
+        .comments-section .comment-form textarea {
+            background: #0a0a0f;
+            border: 1px solid #1a1a26;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #eee;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            width: 100%;
+            transition: border 0.3s;
+        }
+        .comments-section .comment-form input:focus,
+        .comments-section .comment-form textarea:focus {
+            outline: none;
+            border-color: #6a8cff;
+        }
+        .comments-section .comment-form input {
+            flex: 1;
+            min-width: 150px;
+        }
+        .comments-section .comment-form textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .comments-section .comment-form .comment-btn {
+            background: #6a8cff;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+            align-self: flex-start;
+        }
+        .comments-section .comment-form .comment-btn:hover {
+            background: #5a7cee;
+        }
+        .comments-section .comment-form .comment-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .comments-section .no-comments {
+            color: #555;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px 0;
+        }
+
         @media (max-width: 768px) {
             .logo { font-size: 1.4rem; }
             .home-hero h1 { font-size: 2.2rem; }
@@ -861,6 +981,7 @@
             .poll-overlay .overlay-poll-images img { max-height: 140px; }
             .news-item:first-child { border-top: none; }
             .poll-item:first-child { border-top: none; }
+            .comments-section .comment-form .form-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -873,7 +994,7 @@
             <span></span>
             <span></span>
         </div>
-        <div class="logo">INORS <span>GAME'S</span></div>
+        <div class="logo">INORS <span>GAMES</span></div>
         <nav class="dropdown-menu" id="dropdownMenu">
             <a href="#" data-page="home" class="active-link">Главная</a>
             <a href="#" data-page="games">Игры</a>
@@ -885,8 +1006,8 @@
     <div class="content">
         <div id="page-home" class="page active">
             <div class="home-hero">
-                <h1>Inors Game's</h1>
-                <p>Inors Game's — маленькая команда, которая сделала Inors Survival и продолжает её создавать.</p>
+                <h1>Inors Games</h1>
+                <p>Inors Games — маленькая команда, которая сделала Inors Survival и продолжает её создавать.</p>
             </div>
         </div>
 
@@ -922,7 +1043,7 @@
     </div>
 
     <footer>
-        © 2026 Inors Game's · <a href="https://t.me/life_in_russia_simulator" target="_blank">Telegram</a>
+        © 2026 Inors Games · <a href="https://t.me/life_in_russia_simulator" target="_blank">Telegram</a>
     </footer>
 </div>
 
@@ -1065,7 +1186,7 @@
                     ${game.genre ? `<span class="badge">${game.genre}</span>` : ''}
                     ${game.year ? `<span class="year">${game.year}</span>` : ''}
                     ${game.platform ? `<span>${game.platform}</span>` : ''}
-                    <span>Inors Game's</span>
+                    <span>Inors Games</span>
                 </div>
                 <div class="overlay-description">
                     <p>${game.description || ''}</p>
@@ -1161,6 +1282,7 @@
                             ${preview ? `<div class="news-preview">${preview}</div>` : ''}
                             <div class="read-more">Читать полностью →</div>
                             ${item.image_url ? `<img src="${item.image_url}" class="news-image" alt="изображение" loading="lazy" />` : ''}
+                            ${item.sticker ? `<img src="${item.sticker}" class="news-sticker" />` : ''}
                         </div>
                     </div>
                 `;
@@ -1195,7 +1317,51 @@
         }
 
         // ============================================
-        // 📖 ОТКРЫТИЕ НОВОСТИ
+        // 💬 ОТПРАВКА КОММЕНТАРИЯ
+        // ============================================
+        async function sendComment(newsId) {
+            const authorInput = document.getElementById('commentAuthor');
+            const textInput = document.getElementById('commentText');
+            const btn = document.getElementById('sendCommentBtn');
+            
+            const author = authorInput.value.trim() || 'Аноним';
+            const content = textInput.value.trim();
+            
+            if (!content) {
+                alert('Напишите комментарий');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+
+            try {
+                const { error } = await supabase
+                    .from('comments')
+                    .insert([{
+                        news_id: newsId,
+                        author: author,
+                        content: content
+                    }]);
+
+                if (error) throw error;
+
+                // Очищаем поле
+                textInput.value = '';
+                // Обновляем список комментариев
+                loadComments(newsId);
+                btn.textContent = 'Отправлено ✅';
+                setTimeout(() => { btn.textContent = 'Отправить'; btn.disabled = false; }, 2000);
+            } catch (e) {
+                console.error('Ошибка отправки комментария:', e);
+                alert('Не удалось отправить комментарий');
+                btn.textContent = 'Отправить';
+                btn.disabled = false;
+            }
+        }
+
+        // ============================================
+        // 📖 ОТКРЫТИЕ НОВОСТИ + КОММЕНТАРИИ
         // ============================================
         const newsOverlay = document.getElementById('newsOverlay');
         const newsOverlayContent = document.getElementById('newsOverlayContent');
@@ -1215,13 +1381,59 @@
                 html += `<img src="${news.image_url}" class="overlay-news-image" alt="изображение" loading="lazy" />`;
             }
             
+            if (news.sticker) {
+                html += `<img src="${news.sticker}" class="overlay-news-sticker" />`;
+            }
+            
             html += `<div class="overlay-news-content">`;
             paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+            html += `</div>`;
+            
+            // Загружаем голосование
+            try {
+                const { data: pollData, error } = await supabase
+                    .from('polls')
+                    .select('*')
+                    .eq('news_id', news.id)
+                    .single();
+
+                if (!error && pollData) {
+                    html += renderPoll(pollData);
+                }
+            } catch (e) {
+                console.log('Нет голосования для этой новости');
+            }
+            
+            // === КОММЕНТАРИИ (без смайла) ===
+            html += `<div class="comments-section" id="commentsSection">`;
+            html += `<div class="comments-title">Комментарии</div>`;
+            html += `<div id="commentsList"></div>`;
+            html += `
+                <div class="comment-form">
+                    <div class="form-row">
+                        <input type="text" id="commentAuthor" placeholder="Ваше имя" maxlength="30" />
+                    </div>
+                    <textarea id="commentText" placeholder="Напишите комментарий..." rows="2"></textarea>
+                    <button class="comment-btn" id="sendCommentBtn" data-news-id="${news.id}">Отправить</button>
+                </div>
+            `;
             html += `</div>`;
             
             newsOverlayContent.innerHTML = html;
             newsOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
+
+            // Загружаем комментарии для этой новости
+            loadComments(news.id);
+            
+            // Обработчик отправки комментария
+            document.getElementById('sendCommentBtn').addEventListener('click', function() {
+                const newsId = parseInt(this.dataset.newsId);
+                sendComment(newsId);
+            });
+
+            // Обработчики голосования (если есть)
+            attachPollHandlers();
         }
 
         function closeNewsOverlay() {
@@ -1256,7 +1468,6 @@
         // ============================================
         // 🗳️ ГОЛОСОВАНИЯ
         // ============================================
-        let allPollsData = [];
         let isVotingInProgress = false;
 
         function renderPoll(pollData) {
@@ -1330,15 +1541,8 @@
             const pollId = parseInt(el.dataset.pollId);
             const optionIndex = parseInt(el.dataset.index);
             
-            if (isVotingInProgress) {
-                console.log('Голосование уже выполняется...');
-                return;
-            }
-            
-            if (localStorage.getItem('poll_voted_' + pollId) === 'true') {
-                console.log('Вы уже голосовали');
-                return;
-            }
+            if (isVotingInProgress) return;
+            if (localStorage.getItem('poll_voted_' + pollId) === 'true') return;
 
             isVotingInProgress = true;
             el.style.opacity = '0.5';
@@ -1402,6 +1606,11 @@
             }
         }
 
+        // ============================================
+        // 🗳️ ГОЛОСОВАНИЯ (список)
+        // ============================================
+        let allPollsData = [];
+
         async function loadPolls() {
             const container = document.getElementById('pollsContainer');
             if (!container) return;
@@ -1462,6 +1671,7 @@
                             <h4>${poll.title || 'Голосование'}</h4>
                             ${preview ? `<div class="poll-preview">${preview}</div>` : ''}
                             <div class="poll-vote-btn">Проголосовать →</div>
+                            ${poll.sticker ? `<img src="${poll.sticker}" class="poll-sticker" />` : ''}
                         </div>
                     </div>
                 `;
@@ -1506,6 +1716,10 @@
                     html += `<img src="${img}" alt="Фото" loading="lazy" />`;
                 });
                 html += `</div>`;
+            }
+
+            if (pollData.sticker) {
+                html += `<img src="${pollData.sticker}" class="overlay-poll-sticker" />`;
             }
 
             html += `<div class="poll-options-wrapper" data-poll-id="${pollData.id}">`;
@@ -1562,6 +1776,50 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && pollOverlay.classList.contains('open')) closePollOverlay();
         });
+
+        // ============================================
+        // 💬 КОММЕНТАРИИ
+        // ============================================
+        async function loadComments(newsId) {
+            const container = document.getElementById('commentsList');
+            if (!container) return;
+            
+            try {
+                const { data, error } = await supabase
+                    .from('comments')
+                    .select('*')
+                    .eq('news_id', newsId)
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    let html = '';
+                    data.forEach(comment => {
+                        const time = new Date(comment.created_at).toLocaleString('ru-RU', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        html += `
+                            <div class="comment">
+                                <span class="comment-author">${comment.author || 'Аноним'}</span>
+                                <span class="comment-time">${time}</span>
+                                <div class="comment-text">${comment.content}</div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML = `<div class="no-comments">Комментариев пока нет. Будьте первым!</div>`;
+                }
+            } catch (e) {
+                console.error('Ошибка загрузки комментариев:', e);
+                container.innerHTML = `<div class="no-comments" style="color:#6a3c3c;">Ошибка загрузки комментариев</div>`;
+            }
+        }
 
         // ============================================
         // 🍔 БУРГЕР
@@ -1647,7 +1905,7 @@
         // ============================================
         // 🚀 ЗАПУСК
         // ============================================
-        console.log('Inors Game\'s запущен!');
+        console.log('Inors Games запущен!');
         loadGames();
         loadNews();
         loadPolls();
