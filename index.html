@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         * { -webkit-tap-highlight-color: transparent; }
         body {
@@ -154,7 +153,6 @@
             margin-bottom: 30px;
         }
 
-        /* ===== ИГРЫ ===== */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -403,7 +401,6 @@
             border-color: #5a7cee;
         }
 
-        /* ===== НОВОСТИ ===== */
         .news-list { display: flex; flex-direction: column; gap: 0; }
         .news-item {
             display: flex;
@@ -468,7 +465,6 @@
             margin-top: 6px;
         }
 
-        /* ===== ПОЛЛИНГ (список голосований) ===== */
         .polls-list { display: flex; flex-direction: column; gap: 0; }
         .poll-item {
             display: flex;
@@ -525,7 +521,6 @@
             margin-top: 6px;
         }
 
-        /* ===== ОВЕРЛЕЙ НОВОСТИ ===== */
         .news-overlay {
             display: none;
             position: fixed;
@@ -624,7 +619,6 @@
             margin-bottom: 10px;
         }
 
-        /* ===== ОВЕРЛЕЙ ГОЛОСОВАНИЯ ===== */
         .poll-overlay {
             display: none;
             position: fixed;
@@ -741,7 +735,6 @@
             z-index: 1;
             flex: 1;
         }
-        /* ===== РАДИО-КНОПКИ (КРУГЛЫЕ) В ОВЕРЛЕЕ ===== */
         .poll-overlay .overlay-poll-option .poll-radio {
             width: 20px !important;
             height: 20px !important;
@@ -836,7 +829,6 @@
             margin-bottom: 10px;
         }
 
-        /* ===== ОСНОВНЫЕ ГОЛОСОВАНИЯ ===== */
         .poll-container {
             background: #1a1a22;
             border-radius: 16px;
@@ -919,7 +911,6 @@
             z-index: 1;
             flex: 1;
         }
-        /* ===== РАДИО-КНОПКИ (КРУГЛЫЕ) В ОСНОВНОМ БЛОКЕ ===== */
         .poll-container .poll-option .poll-radio {
             width: 20px !important;
             height: 20px !important;
@@ -993,7 +984,6 @@
             border-color: #2a2a3a;
         }
 
-        /* ===== ОБЩИЕ ===== */
         .empty-news {
             padding: 60px 20px;
             color: #777;
@@ -1169,7 +1159,6 @@
     </header>
 
     <div class="content">
-        <!-- ===== ГЛАВНАЯ ===== -->
         <div id="page-home" class="page active">
             <div class="home-hero">
                 <h1>Inors Games</h1>
@@ -1177,7 +1166,6 @@
             </div>
         </div>
 
-        <!-- ===== ИГРЫ ===== -->
         <div id="page-games" class="page">
             <h2 class="page-title">Наши <span>игры</span></h2>
             <div id="gamesContainer">
@@ -1188,7 +1176,6 @@
             </div>
         </div>
 
-        <!-- ===== НОВОСТИ ===== -->
         <div id="page-news" class="page">
             <h2 class="page-title">Новости <span>команды</span></h2>
             <div id="newsContainer">
@@ -1199,7 +1186,6 @@
             </div>
         </div>
 
-        <!-- ===== ГОЛОСОВАНИЯ ===== -->
         <div id="page-polls" class="page">
             <h2 class="page-title">Голосования <span>команды</span></h2>
             <div id="pollsContainer">
@@ -1216,7 +1202,6 @@
     </footer>
 </div>
 
-<!-- ===== ОВЕРЛЕИ ===== -->
 <div class="game-page-overlay" id="gamePageOverlay">
     <div class="overlay-content">
         <button class="close-overlay" id="closeGamePage">
@@ -1249,12 +1234,58 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // ===== SUPABASE =====
         const SUPABASE_URL = 'https://cdmzvyfsuyzqqnekuzfa.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkbXp2eWZzdXl6cXFuZWt1emZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNzE4MDgsImV4cCI6MjEwMzk0NzgwOH0.oBjQXyu4YrzXstdUI-CnPWgE_tHVwSIuBmj1_8wnbrI';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // ===== ИГРЫ =====
+        // ============================================================
+        // 🔧 ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        // ============================================================
+        function formatDateShort(dateStr) {
+            if (!dateStr) return '';
+            try {
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) return dateStr;
+                const now = new Date();
+                const diff = Math.floor((now - date) / (1000 * 60));
+                if (diff < 1) return 'Только что';
+                if (diff < 60) return diff + ' мин';
+                if (diff < 1440) return Math.floor(diff / 60) + ' ч';
+                if (diff < 43200) return Math.floor(diff / 1440) + ' д';
+                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+            } catch { return dateStr; }
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'Без даты';
+            try {
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) return dateStr;
+                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+            } catch { return dateStr; }
+        }
+
+        // Получение IP через внешний сервис
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (e) {
+                console.warn('Не удалось определить IP, используем fallback');
+                return 'unknown';
+            }
+        }
+
+        // Проверка на наличие ссылок в тексте
+        function containsLink(text) {
+            const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi;
+            return urlRegex.test(text);
+        }
+
+        // ============================================================
+        // 🎮 ИГРЫ
+        // ============================================================
         let allGamesData = [];
 
         async function loadGames() {
@@ -1345,7 +1376,9 @@
         gameOverlay.addEventListener('click', function(e) { if (e.target === gameOverlay) closeGameOverlay(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && gameOverlay.classList.contains('open')) closeGameOverlay(); });
 
-        // ===== НОВОСТИ =====
+        // ============================================================
+        // 📰 НОВОСТИ
+        // ============================================================
         let allNewsData = [];
 
         async function loadNews() {
@@ -1398,23 +1431,6 @@
                     if (news) openNewsOverlay(news);
                 });
             });
-        }
-
-        function formatDateShort(dateStr) {
-            if (!dateStr) return '';
-            try {
-                const date = new Date(dateStr);
-                if (isNaN(date.getTime())) return dateStr;
-                const now = new Date();
-                const diff = Math.floor((now - date) / (1000 * 60));
-                if (diff < 1) return 'Только что';
-                if (diff < 60) return diff + ' мин';
-                if (diff < 1440) return Math.floor(diff / 60) + ' ч';
-                if (diff < 43200) return Math.floor(diff / 1440) + ' д';
-                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-            } catch {
-                return dateStr;
-            }
         }
 
         const newsOverlay = document.getElementById('newsOverlay');
@@ -1470,34 +1486,66 @@
         newsOverlay.addEventListener('click', function(e) { if (e.target === newsOverlay) closeNewsOverlay(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && newsOverlay.classList.contains('open')) closeNewsOverlay(); });
 
-        function formatDate(dateStr) {
-            if (!dateStr) return 'Без даты';
-            try {
-                const date = new Date(dateStr);
-                if (isNaN(date.getTime())) return dateStr;
-                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-            } catch { return dateStr; }
-        }
-
-        // ===== КОММЕНТАРИИ =====
+        // ============================================================
+        // 💬 КОММЕНТАРИИ (с запретом ссылок и ограничением по IP)
+        // ============================================================
         async function sendComment(newsId) {
             const authorInput = document.getElementById('commentAuthor');
             const textInput = document.getElementById('commentText');
             const btn = document.getElementById('sendCommentBtn');
             const author = authorInput.value.trim() || 'Аноним';
             const content = textInput.value.trim();
-            if (!content) { alert('Напишите комментарий'); return; }
+            
+            if (!content) {
+                alert('Напишите комментарий');
+                return;
+            }
+
+            if (containsLink(content)) {
+                alert('В комментариях запрещены ссылки');
+                return;
+            }
+
             btn.disabled = true;
-            btn.textContent = 'Отправка...';
+            btn.textContent = 'Проверка...';
+
             try {
-                const { error } = await supabase.from('comments').insert([{ news_id: newsId, author, content }]);
+                const ip = await getIP();
+                
+                const { data: existing, error: checkError } = await supabase
+                    .from('comments')
+                    .select('id')
+                    .eq('news_id', newsId)
+                    .eq('ip', ip)
+                    .limit(1);
+
+                if (checkError) throw checkError;
+
+                if (existing && existing.length > 0) {
+                    alert('Вы уже оставляли комментарий к этой новости');
+                    btn.disabled = false;
+                    btn.textContent = 'Отправить';
+                    return;
+                }
+
+                btn.textContent = 'Отправка...';
+                const { error } = await supabase
+                    .from('comments')
+                    .insert([{
+                        news_id: newsId,
+                        author: author,
+                        content: content,
+                        ip: ip
+                    }]);
+
                 if (error) throw error;
+
                 textInput.value = '';
                 loadComments(newsId);
                 btn.textContent = 'Отправлено ✅';
                 setTimeout(() => { btn.textContent = 'Отправить'; btn.disabled = false; }, 2000);
             } catch (e) {
-                console.error(e);
+                console.error('Ошибка отправки комментария:', e);
                 alert('Не удалось отправить комментарий');
                 btn.textContent = 'Отправить';
                 btn.disabled = false;
@@ -1508,7 +1556,12 @@
             const container = document.getElementById('commentsList');
             if (!container) return;
             try {
-                const { data, error } = await supabase.from('comments').select('*').eq('news_id', newsId).order('created_at', { ascending: false });
+                const { data, error } = await supabase
+                    .from('comments')
+                    .select('*')
+                    .eq('news_id', newsId)
+                    .order('created_at', { ascending: false });
+
                 if (error) throw error;
                 if (data && data.length > 0) {
                     let html = '';
@@ -1527,12 +1580,14 @@
                     container.innerHTML = `<div class="no-comments">Комментариев пока нет. Будьте первым!</div>`;
                 }
             } catch (e) {
-                console.error(e);
+                console.error('Ошибка загрузки комментариев:', e);
                 container.innerHTML = `<div class="no-comments" style="color:#6a3c3c;">Ошибка загрузки комментариев</div>`;
             }
         }
 
-        // ===== ГОЛОСОВАНИЯ =====
+        // ============================================================
+        // 🗳️ ГОЛОСОВАНИЯ (С ЗАЩИТОЙ ПО IP)
+        // ============================================================
         let isVotingInProgress = false;
 
         function renderPoll(pollData) {
@@ -1591,21 +1646,66 @@
             const el = this;
             const pollId = parseInt(el.dataset.pollId);
             const optionIndex = parseInt(el.dataset.index);
+            
             if (isVotingInProgress) return;
             if (localStorage.getItem('poll_voted_' + pollId) === 'true') return;
+
+            // Блокируем кнопку
             isVotingInProgress = true;
             el.style.opacity = '0.5';
             el.style.pointerEvents = 'none';
+
             try {
-                const { data: poll, error: fetchError } = await supabase.from('polls').select('*').eq('id', pollId).single();
+                // 1. Получаем IP
+                const ip = await getIP();
+
+                // 2. Проверяем, не голосовал ли уже этот IP за этот опрос
+                const { data: poll, error: fetchError } = await supabase
+                    .from('polls')
+                    .select('*')
+                    .eq('id', pollId)
+                    .single();
+
                 if (fetchError || !poll) throw new Error('Не удалось загрузить голосование');
+
+                // Проверяем voted_ips
+                const votedIps = poll.voted_ips || [];
+                if (votedIps.includes(ip)) {
+                    alert('Вы уже голосовали в этом опросе (с этого IP)');
+                    isVotingInProgress = false;
+                    el.style.opacity = '1';
+                    el.style.pointerEvents = 'auto';
+                    return;
+                }
+
+                // 3. Обновляем голоса
                 const votes = poll.votes || poll.options.map(() => 0);
                 votes[optionIndex] = (votes[optionIndex] || 0) + 1;
-                const { error: updateError } = await supabase.from('polls').update({ votes }).eq('id', pollId);
+                
+                // Добавляем IP в список проголосовавших
+                votedIps.push(ip);
+
+                const { error: updateError } = await supabase
+                    .from('polls')
+                    .update({ 
+                        votes: votes,
+                        voted_ips: votedIps
+                    })
+                    .eq('id', pollId);
+
                 if (updateError) throw updateError;
+
+                // 4. Сохраняем локально
                 localStorage.setItem('poll_voted_' + pollId, 'true');
                 localStorage.setItem('poll_selected_' + pollId, String(optionIndex));
-                const { data: newPoll } = await supabase.from('polls').select('*').eq('id', pollId).single();
+
+                // 5. Обновляем интерфейс
+                const { data: newPoll } = await supabase
+                    .from('polls')
+                    .select('*')
+                    .eq('id', pollId)
+                    .single();
+
                 if (newPoll) {
                     const container = el.closest('.poll-container');
                     if (container) {
@@ -1701,7 +1801,9 @@
         pollOverlay.addEventListener('click', function(e) { if (e.target === pollOverlay) closePollOverlay(); });
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && pollOverlay.classList.contains('open')) closePollOverlay(); });
 
-        // ===== БУРГЕР =====
+        // ============================================================
+        // 🍔 БУРГЕР
+        // ============================================================
         const burger = document.getElementById('burger');
         const dropdown = document.getElementById('dropdownMenu');
         let isOpen = false;
@@ -1732,7 +1834,9 @@
             }, { passive: true });
         }
 
-        // ===== НАВИГАЦИЯ =====
+        // ============================================================
+        // 🧭 НАВИГАЦИЯ
+        // ============================================================
         const menuLinks = dropdown ? dropdown.querySelectorAll('a[data-page]') : [];
         const pages = {
             home: document.getElementById('page-home'),
@@ -1771,7 +1875,9 @@
             }, { passive: false });
         });
 
-        // ===== ЗАПУСК =====
+        // ============================================================
+        // 🚀 ЗАПУСК
+        // ============================================================
         console.log('Inors Games запущен!');
         loadGames();
         loadNews();
