@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
+        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         * { -webkit-tap-highlight-color: transparent; }
         body {
@@ -153,6 +154,7 @@
             margin-bottom: 30px;
         }
 
+        /* ===== ИГРЫ ===== */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -401,6 +403,7 @@
             border-color: #5a7cee;
         }
 
+        /* ===== НОВОСТИ ===== */
         .news-list { display: flex; flex-direction: column; gap: 0; }
         .news-item {
             display: flex;
@@ -465,6 +468,7 @@
             margin-top: 6px;
         }
 
+        /* ===== ПОЛЛИНГ (список голосований) ===== */
         .polls-list { display: flex; flex-direction: column; gap: 0; }
         .poll-item {
             display: flex;
@@ -521,6 +525,7 @@
             margin-top: 6px;
         }
 
+        /* ===== ОВЕРЛЕЙ НОВОСТИ ===== */
         .news-overlay {
             display: none;
             position: fixed;
@@ -619,6 +624,7 @@
             margin-bottom: 10px;
         }
 
+        /* ===== ОВЕРЛЕЙ ГОЛОСОВАНИЯ ===== */
         .poll-overlay {
             display: none;
             position: fixed;
@@ -715,7 +721,7 @@
         }
         .poll-overlay .overlay-poll-option.voted {
             border-color: #6a8cff;
-            background: rgba(106, 140, 255, 0.04);
+            background: rgba(106, 140, 255, 0.06);
         }
         .poll-overlay .overlay-poll-option .poll-bar {
             position: absolute;
@@ -734,32 +740,34 @@
             position: relative;
             z-index: 1;
             flex: 1;
-            min-height: 24px;
         }
+        /* ===== РАДИО-КНОПКИ (КРУГЛЫЕ) В ОВЕРЛЕЕ ===== */
         .poll-overlay .overlay-poll-option .poll-radio {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid #4a4a5a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: border-color 0.2s ease, background 0.2s ease;
+            width: 20px !important;
+            height: 20px !important;
+            border-radius: 50% !important;
+            border: 2px solid #4a4a5a !important;
+            background: transparent !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: border-color 0.2s ease, background 0.2s ease !important;
         }
         .poll-overlay .overlay-poll-option:hover:not(.disabled) .poll-radio {
-            border-color: #6a8cff;
+            border-color: #6a8cff !important;
         }
         .poll-overlay .overlay-poll-option.voted .poll-radio {
-            border-color: #6a8cff;
-            background: #6a8cff;
+            border-color: #6a8cff !important;
+            background: #6a8cff !important;
         }
         .poll-overlay .overlay-poll-option.voted .poll-radio::after {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #fff;
+            content: '' !important;
+            width: 8px !important;
+            height: 8px !important;
+            border-radius: 50% !important;
+            background: #fff !important;
+            display: block !important;
         }
         .poll-overlay .overlay-poll-option .poll-text {
             color: #ddd;
@@ -776,13 +784,13 @@
             color: #6a8cff;
             font-size: 0.85rem;
             font-weight: 600;
-            min-width: 40px;
+            min-width: 44px;
             text-align: right;
             white-space: nowrap;
         }
         .poll-overlay .poll-total {
             color: #555;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             margin-top: 12px;
             text-align: right;
             border-top: 1px solid #1a1a2a;
@@ -809,7 +817,7 @@
         .poll-overlay .overlay-poll-images {
             display: flex;
             gap: 10px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
         }
         .poll-overlay .overlay-poll-images img {
@@ -828,6 +836,164 @@
             margin-bottom: 10px;
         }
 
+        /* ===== ОСНОВНЫЕ ГОЛОСОВАНИЯ ===== */
+        .poll-container {
+            background: #1a1a22;
+            border-radius: 16px;
+            padding: 20px 24px 24px;
+            border: 1px solid #2a2a30;
+            transition: border-color 0.2s ease;
+            margin-bottom: 16px;
+        }
+        .poll-container:hover {
+            border-color: #3a3a4a;
+        }
+        .poll-container .poll-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .poll-container .poll-header .poll-icon {
+            font-size: 1.3rem;
+            color: #6a8cff;
+        }
+        .poll-container .poll-header .poll-question {
+            color: #eee;
+            font-size: 1rem;
+            font-weight: 600;
+            flex: 1;
+        }
+        .poll-container .poll-images {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .poll-container .poll-images img {
+            max-width: 100%;
+            max-height: 180px;
+            border-radius: 10px;
+            border: 1px solid #2a2a30;
+            flex: 1;
+            min-width: 100px;
+            object-fit: cover;
+        }
+        .poll-container .poll-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            background: #12121c;
+            border: 1px solid #2a2a3a;
+            position: relative;
+            overflow: hidden;
+        }
+        .poll-container .poll-option:hover:not(.disabled) {
+            background: #1a1a2a;
+            border-color: #4a4a5a;
+        }
+        .poll-container .poll-option.voted {
+            border-color: #6a8cff;
+            background: rgba(106, 140, 255, 0.06);
+        }
+        .poll-container .poll-option .poll-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: rgba(106, 140, 255, 0.06);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        .poll-container .poll-option .poll-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        /* ===== РАДИО-КНОПКИ (КРУГЛЫЕ) В ОСНОВНОМ БЛОКЕ ===== */
+        .poll-container .poll-option .poll-radio {
+            width: 20px !important;
+            height: 20px !important;
+            border-radius: 50% !important;
+            border: 2px solid #4a4a5a !important;
+            background: transparent !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            transition: border-color 0.2s ease, background 0.2s ease !important;
+        }
+        .poll-container .poll-option:hover:not(.disabled) .poll-radio {
+            border-color: #6a8cff !important;
+        }
+        .poll-container .poll-option.voted .poll-radio {
+            border-color: #6a8cff !important;
+            background: #6a8cff !important;
+        }
+        .poll-container .poll-option.voted .poll-radio::after {
+            content: '' !important;
+            width: 8px !important;
+            height: 8px !important;
+            border-radius: 50% !important;
+            background: #fff !important;
+            display: block !important;
+        }
+        .poll-container .poll-option .poll-text {
+            color: #ddd;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .poll-container .poll-option .poll-votes-count {
+            color: #555;
+            font-size: 0.7rem;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        .poll-container .poll-option .poll-percent {
+            color: #6a8cff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 44px;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .poll-container .poll-total {
+            color: #555;
+            font-size: 0.75rem;
+            margin-top: 12px;
+            text-align: right;
+            border-top: 1px solid #1a1a2a;
+            padding-top: 12px;
+        }
+        .poll-container .poll-message {
+            color: #6a8cff;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(106, 140, 255, 0.04);
+            border: 1px solid rgba(106, 140, 255, 0.08);
+        }
+        .poll-container .poll-option.disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+        .poll-container .poll-option.disabled:hover {
+            background: #12121c;
+            border-color: #2a2a3a;
+        }
+
+        /* ===== ОБЩИЕ ===== */
         .empty-news {
             padding: 60px 20px;
             color: #777;
@@ -974,10 +1140,10 @@
             .poll-item .poll-date { min-width: 50px; font-size: 0.65rem; }
             .poll-item .poll-content h4 { font-size: 0.9rem; }
             .poll-overlay .overlay-poll-title { font-size: 1.3rem; }
-            .poll-overlay .overlay-poll-option { padding: 8px 12px; flex-wrap: wrap; gap: 6px; }
+            .poll-overlay .overlay-poll-option { padding: 8px 12px; flex-wrap: wrap; gap: 8px; }
             .poll-overlay .overlay-poll-option .poll-label { flex-wrap: wrap; gap: 4px; }
             .poll-overlay .overlay-poll-option .poll-votes-count { margin-left: 0; }
-            .poll-overlay .overlay-poll-option .poll-percent { min-width: 30px; }
+            .poll-overlay .overlay-poll-option .poll-percent { min-width: 34px; }
             .poll-overlay .overlay-poll-images img { max-height: 140px; }
             .news-item:first-child { border-top: none; }
             .poll-item:first-child { border-top: none; }
@@ -986,7 +1152,6 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <header>
         <div class="burger-menu" id="burger">
@@ -1004,6 +1169,7 @@
     </header>
 
     <div class="content">
+        <!-- ===== ГЛАВНАЯ ===== -->
         <div id="page-home" class="page active">
             <div class="home-hero">
                 <h1>Inors Games</h1>
@@ -1011,6 +1177,7 @@
             </div>
         </div>
 
+        <!-- ===== ИГРЫ ===== -->
         <div id="page-games" class="page">
             <h2 class="page-title">Наши <span>игры</span></h2>
             <div id="gamesContainer">
@@ -1021,6 +1188,7 @@
             </div>
         </div>
 
+        <!-- ===== НОВОСТИ ===== -->
         <div id="page-news" class="page">
             <h2 class="page-title">Новости <span>команды</span></h2>
             <div id="newsContainer">
@@ -1031,6 +1199,7 @@
             </div>
         </div>
 
+        <!-- ===== ГОЛОСОВАНИЯ ===== -->
         <div id="page-polls" class="page">
             <h2 class="page-title">Голосования <span>команды</span></h2>
             <div id="pollsContainer">
@@ -1047,6 +1216,7 @@
     </footer>
 </div>
 
+<!-- ===== ОВЕРЛЕИ ===== -->
 <div class="game-page-overlay" id="gamePageOverlay">
     <div class="overlay-content">
         <button class="close-overlay" id="closeGamePage">
@@ -1079,72 +1249,44 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        
+        // ===== SUPABASE =====
         const SUPABASE_URL = 'https://cdmzvyfsuyzqqnekuzfa.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkbXp2eWZzdXl6cXFuZWt1emZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNzE4MDgsImV4cCI6MjEwMzk0NzgwOH0.oBjQXyu4YrzXstdUI-CnPWgE_tHVwSIuBmj1_8wnbrI';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // ============================================
-        // 🎮 ИГРЫ
-        // ============================================
+        // ===== ИГРЫ =====
         let allGamesData = [];
 
         async function loadGames() {
             const container = document.getElementById('gamesContainer');
             if (!container) return;
-            
             try {
-                const { data, error } = await supabase
-                    .from('games')
-                    .select('*')
-                    .order('id', { ascending: false });
-
+                const { data, error } = await supabase.from('games').select('*').order('id', { ascending: false });
                 if (error) throw error;
-
                 allGamesData = data || [];
-
                 if (data && data.length > 0) {
                     renderGames(data);
                 } else {
-                    container.innerHTML = `
-                        <div class="empty-news">
-                            <span>🎮</span>
-                            Игр пока нет.
-                            <br><small style="color:#555;">Скоро появятся!</small>
-                        </div>
-                    `;
+                    container.innerHTML = `<div class="empty-news"><span>🎮</span>Игр пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
                 }
             } catch (e) {
                 console.error('Ошибка загрузки игр:', e);
-                container.innerHTML = `
-                    <div class="empty-news" style="border-color:#6a3c3c;">
-                        <span>⚠️</span>
-                        Ошибка загрузки игр
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки игр</div>`;
             }
         }
 
         function renderGames(gamesArray) {
             const container = document.getElementById('gamesContainer');
             if (!container || !gamesArray || gamesArray.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-news">
-                        <span>🎮</span>
-                        Игр пока нет.
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news"><span>🎮</span>Игр пока нет.</div>`;
                 return;
             }
-
             let html = '<div class="games-grid">';
             gamesArray.forEach(game => {
                 const hasImage = game.image_url && game.image_url.trim() !== '';
                 html += `
                     <div class="game-card" data-game-id="${game.id}">
-                        <div class="game-screenshot">
-                            ${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}
-                        </div>
+                        <div class="game-screenshot">${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}</div>
                         <div class="game-info">
                             <div class="game-title">${game.title || 'Без названия'}</div>
                             <div class="game-meta">
@@ -1159,7 +1301,6 @@
             });
             html += '</div>';
             container.innerHTML = html;
-
             document.querySelectorAll('.game-card').forEach(el => {
                 el.addEventListener('click', function() {
                     const id = parseInt(this.dataset.gameId);
@@ -1176,11 +1317,8 @@
         function openGameOverlay(game) {
             const hasImage = game.image_url && game.image_url.trim() !== '';
             const hasDownload = game.download_link && game.download_link.trim() !== '';
-            
             let html = `
-                <div class="overlay-image">
-                    ${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}
-                </div>
+                <div class="overlay-image">${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}</div>
                 <div class="overlay-title">${game.title || 'Без названия'}</div>
                 <div class="overlay-meta">
                     ${game.genre ? `<span class="badge">${game.genre}</span>` : ''}
@@ -1188,15 +1326,12 @@
                     ${game.platform ? `<span>${game.platform}</span>` : ''}
                     <span>Inors Games</span>
                 </div>
-                <div class="overlay-description">
-                    <p>${game.description || ''}</p>
-                </div>
+                <div class="overlay-description"><p>${game.description || ''}</p></div>
                 <div class="overlay-links">
                     ${hasDownload ? `<a href="${game.download_link}" target="_blank" class="btn primary">Скачать игру</a>` : ''}
                     <a href="https://t.me/life_in_russia_simulator" target="_blank" class="btn">Наш Telegram</a>
                 </div>
             `;
-            
             gameOverlayContent.innerHTML = html;
             gameOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -1206,74 +1341,41 @@
             gameOverlay.classList.remove('open');
             document.body.style.overflow = '';
         }
-
         closeGameBtn.addEventListener('click', closeGameOverlay);
-        gameOverlay.addEventListener('click', function(e) {
-            if (e.target === gameOverlay) closeGameOverlay();
-        });
+        gameOverlay.addEventListener('click', function(e) { if (e.target === gameOverlay) closeGameOverlay(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && gameOverlay.classList.contains('open')) closeGameOverlay(); });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && gameOverlay.classList.contains('open')) closeGameOverlay();
-        });
-
-        // ============================================
-        // 📰 НОВОСТИ
-        // ============================================
+        // ===== НОВОСТИ =====
         let allNewsData = [];
 
         async function loadNews() {
             const container = document.getElementById('newsContainer');
             if (!container) return;
-            
             try {
-                const { data, error } = await supabase
-                    .from('news')
-                    .select('*')
-                    .order('date', { ascending: false });
-
+                const { data, error } = await supabase.from('news').select('*').order('date', { ascending: false });
                 if (error) throw error;
-
                 allNewsData = data || [];
-
                 if (data && data.length > 0) {
                     renderNews(data);
                 } else {
-                    container.innerHTML = `
-                        <div class="empty-news">
-                            <span>📭</span>
-                            Новостей пока нет.
-                            <br><small style="color:#555;">Скоро появятся!</small>
-                        </div>
-                    `;
+                    container.innerHTML = `<div class="empty-news"><span>📭</span>Новостей пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
                 }
             } catch (e) {
                 console.error('Ошибка загрузки новостей:', e);
-                container.innerHTML = `
-                    <div class="empty-news" style="border-color:#6a3c3c;">
-                        <span>⚠️</span>
-                        Ошибка загрузки новостей
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки новостей</div>`;
             }
         }
 
         function renderNews(newsArray) {
             const container = document.getElementById('newsContainer');
             if (!container || !newsArray || newsArray.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-news">
-                        <span>📭</span>
-                        Новостей пока нет.
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news"><span>📭</span>Новостей пока нет.</div>`;
                 return;
             }
-
             let html = '<div class="news-list">';
             newsArray.forEach(item => {
                 const formattedDate = formatDateShort(item.date);
                 const preview = item.content ? item.content.substring(0, 120) + (item.content.length > 120 ? '...' : '') : '';
-                
                 html += `
                     <div class="news-item" data-news-id="${item.id}">
                         <div class="news-date">${formattedDate}</div>
@@ -1289,7 +1391,6 @@
             });
             html += '</div>';
             container.innerHTML = html;
-
             document.querySelectorAll('.news-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const id = parseInt(this.dataset.newsId);
@@ -1316,53 +1417,6 @@
             }
         }
 
-        // ============================================
-        // 💬 ОТПРАВКА КОММЕНТАРИЯ
-        // ============================================
-        async function sendComment(newsId) {
-            const authorInput = document.getElementById('commentAuthor');
-            const textInput = document.getElementById('commentText');
-            const btn = document.getElementById('sendCommentBtn');
-            
-            const author = authorInput.value.trim() || 'Аноним';
-            const content = textInput.value.trim();
-            
-            if (!content) {
-                alert('Напишите комментарий');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = 'Отправка...';
-
-            try {
-                const { error } = await supabase
-                    .from('comments')
-                    .insert([{
-                        news_id: newsId,
-                        author: author,
-                        content: content
-                    }]);
-
-                if (error) throw error;
-
-                // Очищаем поле
-                textInput.value = '';
-                // Обновляем список комментариев
-                loadComments(newsId);
-                btn.textContent = 'Отправлено ✅';
-                setTimeout(() => { btn.textContent = 'Отправить'; btn.disabled = false; }, 2000);
-            } catch (e) {
-                console.error('Ошибка отправки комментария:', e);
-                alert('Не удалось отправить комментарий');
-                btn.textContent = 'Отправить';
-                btn.disabled = false;
-            }
-        }
-
-        // ============================================
-        // 📖 ОТКРЫТИЕ НОВОСТИ + КОММЕНТАРИИ
-        // ============================================
         const newsOverlay = document.getElementById('newsOverlay');
         const newsOverlayContent = document.getElementById('newsOverlayContent');
         const closeNewsOverlayBtn = document.getElementById('closeNewsOverlay');
@@ -1371,68 +1425,40 @@
             const formattedDate = formatDate(news.date);
             const content = news.content || '';
             const paragraphs = content.split('\n').filter(p => p.trim());
-            
             let html = `
                 <div class="overlay-news-title">${news.title || 'Без названия'}</div>
                 <span class="overlay-news-date">${formattedDate}</span>
+                ${news.image_url ? `<img src="${news.image_url}" class="overlay-news-image" alt="изображение" loading="lazy" />` : ''}
+                ${news.sticker ? `<img src="${news.sticker}" class="overlay-news-sticker" />` : ''}
+                <div class="overlay-news-content">${paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
             `;
-            
-            if (news.image_url) {
-                html += `<img src="${news.image_url}" class="overlay-news-image" alt="изображение" loading="lazy" />`;
-            }
-            
-            if (news.sticker) {
-                html += `<img src="${news.sticker}" class="overlay-news-sticker" />`;
-            }
-            
-            html += `<div class="overlay-news-content">`;
-            paragraphs.forEach(p => { html += `<p>${p}</p>`; });
-            html += `</div>`;
-            
-            // Загружаем голосование
+            // Загружаем голосование, если привязано
             try {
-                const { data: pollData, error } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .eq('news_id', news.id)
-                    .single();
-
+                const { data: pollData, error } = await supabase.from('polls').select('*').eq('news_id', news.id).single();
                 if (!error && pollData) {
                     html += renderPoll(pollData);
                 }
-            } catch (e) {
-                console.log('Нет голосования для этой новости');
-            }
-            
-            // === КОММЕНТАРИИ (без смайла) ===
-            html += `<div class="comments-section" id="commentsSection">`;
-            html += `<div class="comments-title">Комментарии</div>`;
-            html += `<div id="commentsList"></div>`;
+            } catch (e) { console.log('Нет голосования для этой новости'); }
+            // Комментарии
             html += `
-                <div class="comment-form">
-                    <div class="form-row">
-                        <input type="text" id="commentAuthor" placeholder="Ваше имя" maxlength="30" />
+                <div class="comments-section" id="commentsSection">
+                    <div class="comments-title">Комментарии</div>
+                    <div id="commentsList"></div>
+                    <div class="comment-form">
+                        <div class="form-row"><input type="text" id="commentAuthor" placeholder="Ваше имя" maxlength="30" /></div>
+                        <textarea id="commentText" placeholder="Напишите комментарий..." rows="2"></textarea>
+                        <button class="comment-btn" id="sendCommentBtn" data-news-id="${news.id}">Отправить</button>
                     </div>
-                    <textarea id="commentText" placeholder="Напишите комментарий..." rows="2"></textarea>
-                    <button class="comment-btn" id="sendCommentBtn" data-news-id="${news.id}">Отправить</button>
                 </div>
             `;
-            html += `</div>`;
-            
             newsOverlayContent.innerHTML = html;
             newsOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
-
-            // Загружаем комментарии для этой новости
             loadComments(news.id);
-            
-            // Обработчик отправки комментария
             document.getElementById('sendCommentBtn').addEventListener('click', function() {
                 const newsId = parseInt(this.dataset.newsId);
                 sendComment(newsId);
             });
-
-            // Обработчики голосования (если есть)
             attachPollHandlers();
         }
 
@@ -1440,73 +1466,100 @@
             newsOverlay.classList.remove('open');
             document.body.style.overflow = '';
         }
-
         closeNewsOverlayBtn.addEventListener('click', closeNewsOverlay);
-        newsOverlay.addEventListener('click', function(e) {
-            if (e.target === newsOverlay) closeNewsOverlay();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && newsOverlay.classList.contains('open')) closeNewsOverlay();
-        });
+        newsOverlay.addEventListener('click', function(e) { if (e.target === newsOverlay) closeNewsOverlay(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && newsOverlay.classList.contains('open')) closeNewsOverlay(); });
 
         function formatDate(dateStr) {
             if (!dateStr) return 'Без даты';
             try {
                 const date = new Date(dateStr);
                 if (isNaN(date.getTime())) return dateStr;
-                return date.toLocaleDateString('ru-RU', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-            } catch {
-                return dateStr;
+                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+            } catch { return dateStr; }
+        }
+
+        // ===== КОММЕНТАРИИ =====
+        async function sendComment(newsId) {
+            const authorInput = document.getElementById('commentAuthor');
+            const textInput = document.getElementById('commentText');
+            const btn = document.getElementById('sendCommentBtn');
+            const author = authorInput.value.trim() || 'Аноним';
+            const content = textInput.value.trim();
+            if (!content) { alert('Напишите комментарий'); return; }
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+            try {
+                const { error } = await supabase.from('comments').insert([{ news_id: newsId, author, content }]);
+                if (error) throw error;
+                textInput.value = '';
+                loadComments(newsId);
+                btn.textContent = 'Отправлено ✅';
+                setTimeout(() => { btn.textContent = 'Отправить'; btn.disabled = false; }, 2000);
+            } catch (e) {
+                console.error(e);
+                alert('Не удалось отправить комментарий');
+                btn.textContent = 'Отправить';
+                btn.disabled = false;
             }
         }
 
-        // ============================================
-        // 🗳️ ГОЛОСОВАНИЯ
-        // ============================================
+        async function loadComments(newsId) {
+            const container = document.getElementById('commentsList');
+            if (!container) return;
+            try {
+                const { data, error } = await supabase.from('comments').select('*').eq('news_id', newsId).order('created_at', { ascending: false });
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    let html = '';
+                    data.forEach(comment => {
+                        const time = new Date(comment.created_at).toLocaleString('ru-RU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                        html += `
+                            <div class="comment">
+                                <span class="comment-author">${comment.author || 'Аноним'}</span>
+                                <span class="comment-time">${time}</span>
+                                <div class="comment-text">${comment.content}</div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                } else {
+                    container.innerHTML = `<div class="no-comments">Комментариев пока нет. Будьте первым!</div>`;
+                }
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<div class="no-comments" style="color:#6a3c3c;">Ошибка загрузки комментариев</div>`;
+            }
+        }
+
+        // ===== ГОЛОСОВАНИЯ =====
         let isVotingInProgress = false;
 
         function renderPoll(pollData) {
             if (!pollData) return '';
-            
             const options = pollData.options || [];
             const votes = pollData.votes || options.map(() => 0);
             const totalVotes = votes.reduce((a, b) => a + b, 0);
             const hasVoted = localStorage.getItem('poll_voted_' + pollData.id) === 'true';
             const images = pollData.images || [];
-
             let html = `<div class="poll-container" data-poll-id="${pollData.id}">`;
-            
             const validImages = images.filter(img => img && img.trim() !== '');
             if (validImages.length > 0) {
-                html += `<div class="poll-images">`;
-                validImages.forEach(img => {
-                    html += `<img src="${img}" alt="Фото" loading="lazy" />`;
-                });
-                html += `</div>`;
+                html += `<div class="poll-images">${validImages.map(img => `<img src="${img}" alt="Фото" loading="lazy" />`).join('')}</div>`;
             }
-            
             html += `
                 <div class="poll-header">
                     <span class="poll-icon">📊</span>
                     <span class="poll-question">${pollData.question || 'Голосование'}</span>
                 </div>
             `;
-
             options.forEach((option, index) => {
                 const voteCount = votes[index] || 0;
                 const percent = totalVotes > 0 ? Math.round((voteCount / totalVotes) * 100) : 0;
                 const isSelected = hasVoted && localStorage.getItem('poll_selected_' + pollData.id) === String(index);
-
                 html += `
                     <div class="poll-option ${hasVoted ? 'disabled' : ''} ${isSelected ? 'voted' : ''}" 
-                         data-index="${index}" 
-                         data-poll-id="${pollData.id}"
-                         data-voted="${hasVoted ? 'true' : 'false'}">
+                         data-index="${index}" data-poll-id="${pollData.id}" data-voted="${hasVoted ? 'true' : 'false'}">
                         <div class="poll-bar" style="width:${percent}%;"></div>
                         <div class="poll-label">
                             <div class="poll-radio"></div>
@@ -1517,11 +1570,9 @@
                     </div>
                 `;
             });
-
             html += `<div class="poll-total">Всего голосов: ${totalVotes}</div>`;
             if (hasVoted) html += `<div class="poll-message">✅ Вы уже проголосовали</div>`;
             html += `</div>`;
-
             return html;
         }
 
@@ -1530,140 +1581,79 @@
                 const newEl = el.cloneNode(true);
                 el.parentNode.replaceChild(newEl, el);
             });
-
             document.querySelectorAll('.poll-option:not(.disabled)').forEach(el => {
                 el.addEventListener('click', handlePollClick);
             });
+            console.log('✅ Обработчики голосования привязаны');
         }
 
         async function handlePollClick(e) {
             const el = this;
             const pollId = parseInt(el.dataset.pollId);
             const optionIndex = parseInt(el.dataset.index);
-            
             if (isVotingInProgress) return;
             if (localStorage.getItem('poll_voted_' + pollId) === 'true') return;
-
             isVotingInProgress = true;
             el.style.opacity = '0.5';
             el.style.pointerEvents = 'none';
-
             try {
-                const { data: poll, error: fetchError } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .eq('id', pollId)
-                    .single();
-
-                if (fetchError || !poll) {
-                    isVotingInProgress = false;
-                    el.style.opacity = '1';
-                    el.style.pointerEvents = 'auto';
-                    return;
-                }
-
+                const { data: poll, error: fetchError } = await supabase.from('polls').select('*').eq('id', pollId).single();
+                if (fetchError || !poll) throw new Error('Не удалось загрузить голосование');
                 const votes = poll.votes || poll.options.map(() => 0);
                 votes[optionIndex] = (votes[optionIndex] || 0) + 1;
-
-                const { error: updateError } = await supabase
-                    .from('polls')
-                    .update({ votes: votes })
-                    .eq('id', pollId);
-
-                if (updateError) {
-                    isVotingInProgress = false;
-                    el.style.opacity = '1';
-                    el.style.pointerEvents = 'auto';
-                    return;
-                }
-
+                const { error: updateError } = await supabase.from('polls').update({ votes }).eq('id', pollId);
+                if (updateError) throw updateError;
                 localStorage.setItem('poll_voted_' + pollId, 'true');
                 localStorage.setItem('poll_selected_' + pollId, String(optionIndex));
-
-                isVotingInProgress = false;
-                el.style.opacity = '1';
-                el.style.pointerEvents = 'auto';
-
-                const { data: newPoll } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .eq('id', pollId)
-                    .single();
-
+                const { data: newPoll } = await supabase.from('polls').select('*').eq('id', pollId).single();
                 if (newPoll) {
                     const container = el.closest('.poll-container');
                     if (container) {
                         const newHtml = renderPoll(newPoll);
                         container.outerHTML = newHtml;
-                        attachPollHandlers();
+                        requestAnimationFrame(() => { attachPollHandlers(); });
                     }
                 }
             } catch (e) {
                 console.error('Ошибка голосования:', e);
+                alert('Не удалось проголосовать. Попробуйте позже.');
+            } finally {
                 isVotingInProgress = false;
                 el.style.opacity = '1';
                 el.style.pointerEvents = 'auto';
             }
         }
 
-        // ============================================
-        // 🗳️ ГОЛОСОВАНИЯ (список)
-        // ============================================
         let allPollsData = [];
 
         async function loadPolls() {
             const container = document.getElementById('pollsContainer');
             if (!container) return;
-            
             try {
-                const { data, error } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .order('id', { ascending: false });
-
+                const { data, error } = await supabase.from('polls').select('*').order('id', { ascending: false });
                 if (error) throw error;
-
                 allPollsData = data || [];
-
                 if (data && data.length > 0) {
                     renderPolls(data);
                 } else {
-                    container.innerHTML = `
-                        <div class="empty-news">
-                            <span>🗳️</span>
-                            Голосований пока нет.
-                            <br><small style="color:#555;">Скоро появятся!</small>
-                        </div>
-                    `;
+                    container.innerHTML = `<div class="empty-news"><span>🗳️</span>Голосований пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
                 }
             } catch (e) {
                 console.error('Ошибка загрузки голосований:', e);
-                container.innerHTML = `
-                    <div class="empty-news" style="border-color:#6a3c3c;">
-                        <span>⚠️</span>
-                        Ошибка загрузки голосований
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки голосований</div>`;
             }
         }
 
         function renderPolls(pollsArray) {
             const container = document.getElementById('pollsContainer');
             if (!container || !pollsArray || pollsArray.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-news">
-                        <span>🗳️</span>
-                        Голосований пока нет.
-                    </div>
-                `;
+                container.innerHTML = `<div class="empty-news"><span>🗳️</span>Голосований пока нет.</div>`;
                 return;
             }
-
             let html = '<div class="polls-list">';
             pollsArray.forEach(poll => {
                 const formattedDate = formatDateShort(poll.created_at);
                 const preview = poll.question ? poll.question.substring(0, 120) + (poll.question.length > 120 ? '...' : '') : '';
-                
                 html += `
                     <div class="poll-item" data-poll-id="${poll.id}">
                         <div class="poll-date">${formattedDate}</div>
@@ -1678,7 +1668,6 @@
             });
             html += '</div>';
             container.innerHTML = html;
-
             document.querySelectorAll('.poll-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const id = parseInt(this.dataset.pollId);
@@ -1688,68 +1677,12 @@
             });
         }
 
-        // ============================================
-        // 🗳️ ОТКРЫТИЕ ГОЛОСОВАНИЯ
-        // ============================================
         const pollOverlay = document.getElementById('pollOverlay');
         const pollOverlayContent = document.getElementById('pollOverlayContent');
         const closePollOverlayBtn = document.getElementById('closePollOverlay');
 
         function renderPollInOverlay(pollData) {
-            if (!pollData) return '';
-            
-            const options = pollData.options || [];
-            const votes = pollData.votes || options.map(() => 0);
-            const totalVotes = votes.reduce((a, b) => a + b, 0);
-            const hasVoted = localStorage.getItem('poll_voted_' + pollData.id) === 'true';
-            const images = pollData.images || [];
-
-            let html = `
-                <div class="overlay-poll-title">${pollData.title || 'Голосование'}</div>
-                <div class="overlay-poll-question">${pollData.question || ''}</div>
-            `;
-            
-            const validImages = images.filter(img => img && img.trim() !== '');
-            if (validImages.length > 0) {
-                html += `<div class="overlay-poll-images">`;
-                validImages.forEach(img => {
-                    html += `<img src="${img}" alt="Фото" loading="lazy" />`;
-                });
-                html += `</div>`;
-            }
-
-            if (pollData.sticker) {
-                html += `<img src="${pollData.sticker}" class="overlay-poll-sticker" />`;
-            }
-
-            html += `<div class="poll-options-wrapper" data-poll-id="${pollData.id}">`;
-
-            options.forEach((option, index) => {
-                const voteCount = votes[index] || 0;
-                const percent = totalVotes > 0 ? Math.round((voteCount / totalVotes) * 100) : 0;
-                const isSelected = hasVoted && localStorage.getItem('poll_selected_' + pollData.id) === String(index);
-
-                html += `
-                    <div class="overlay-poll-option ${hasVoted ? 'disabled' : ''} ${isSelected ? 'voted' : ''}" 
-                         data-index="${index}" 
-                         data-poll-id="${pollData.id}"
-                         data-voted="${hasVoted ? 'true' : 'false'}">
-                        <div class="poll-bar" style="width:${percent}%;"></div>
-                        <div class="poll-label">
-                            <div class="poll-radio"></div>
-                            <span class="poll-text">${option}</span>
-                            <span class="poll-votes-count">${voteCount} гол.</span>
-                            <span class="poll-percent">${percent}%</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `<div class="poll-total">Всего голосов: ${totalVotes}</div>`;
-            if (hasVoted) html += `<div class="poll-message">✅ Вы уже проголосовали</div>`;
-            html += `</div>`;
-
-            return html;
+            return renderPoll(pollData);
         }
 
         function openPollOverlay(poll) {
@@ -1757,77 +1690,21 @@
             pollOverlayContent.innerHTML = html;
             pollOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
-
-            setTimeout(() => {
-                attachPollHandlers();
-            }, 100);
+            setTimeout(() => { attachPollHandlers(); }, 150);
         }
 
         function closePollOverlay() {
             pollOverlay.classList.remove('open');
             document.body.style.overflow = '';
         }
-
         closePollOverlayBtn.addEventListener('click', closePollOverlay);
-        pollOverlay.addEventListener('click', function(e) {
-            if (e.target === pollOverlay) closePollOverlay();
-        });
+        pollOverlay.addEventListener('click', function(e) { if (e.target === pollOverlay) closePollOverlay(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && pollOverlay.classList.contains('open')) closePollOverlay(); });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && pollOverlay.classList.contains('open')) closePollOverlay();
-        });
-
-        // ============================================
-        // 💬 КОММЕНТАРИИ
-        // ============================================
-        async function loadComments(newsId) {
-            const container = document.getElementById('commentsList');
-            if (!container) return;
-            
-            try {
-                const { data, error } = await supabase
-                    .from('comments')
-                    .select('*')
-                    .eq('news_id', newsId)
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
-                if (data && data.length > 0) {
-                    let html = '';
-                    data.forEach(comment => {
-                        const time = new Date(comment.created_at).toLocaleString('ru-RU', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
-                        html += `
-                            <div class="comment">
-                                <span class="comment-author">${comment.author || 'Аноним'}</span>
-                                <span class="comment-time">${time}</span>
-                                <div class="comment-text">${comment.content}</div>
-                            </div>
-                        `;
-                    });
-                    container.innerHTML = html;
-                } else {
-                    container.innerHTML = `<div class="no-comments">Комментариев пока нет. Будьте первым!</div>`;
-                }
-            } catch (e) {
-                console.error('Ошибка загрузки комментариев:', e);
-                container.innerHTML = `<div class="no-comments" style="color:#6a3c3c;">Ошибка загрузки комментариев</div>`;
-            }
-        }
-
-        // ============================================
-        // 🍔 БУРГЕР
-        // ============================================
+        // ===== БУРГЕР =====
         const burger = document.getElementById('burger');
         const dropdown = document.getElementById('dropdownMenu');
         let isOpen = false;
-
         if (burger && dropdown) {
             function toggleMenu(e) {
                 if (e) { e.preventDefault(); e.stopPropagation(); }
@@ -1840,28 +1717,22 @@
                     dropdown.classList.remove('open');
                 }
             }
-
             burger.addEventListener('click', toggleMenu);
             burger.addEventListener('touchstart', toggleMenu, { passive: false });
-
             document.addEventListener('click', function(e) {
                 if (dropdown.contains(e.target) || burger.contains(e.target)) return;
                 if (isOpen) toggleMenu(e);
             });
-
             document.addEventListener('touchstart', function(e) {
                 if (dropdown.contains(e.target) || burger.contains(e.target)) return;
                 if (isOpen) toggleMenu(e);
             }, { passive: true });
-
             document.addEventListener('scroll', function() {
                 if (isOpen) toggleMenu();
             }, { passive: true });
         }
 
-        // ============================================
-        // 🧭 НАВИГАЦИЯ
-        // ============================================
+        // ===== НАВИГАЦИЯ =====
         const menuLinks = dropdown ? dropdown.querySelectorAll('a[data-page]') : [];
         const pages = {
             home: document.getElementById('page-home'),
@@ -1872,13 +1743,11 @@
 
         function showPage(pageId) {
             menuLinks.forEach(link => link.classList.remove('active-link'));
-            
             menuLinks.forEach(link => {
                 if (link.dataset.page === pageId) {
                     link.classList.add('active-link');
                 }
             });
-
             Object.values(pages).forEach(p => {
                 if (p) {
                     p.classList.remove('active');
@@ -1902,14 +1771,12 @@
             }, { passive: false });
         });
 
-        // ============================================
-        // 🚀 ЗАПУСК
-        // ============================================
+        // ===== ЗАПУСК =====
         console.log('Inors Games запущен!');
         loadGames();
         loadNews();
         loadPolls();
-        
+        setTimeout(() => { attachPollHandlers(); }, 1000);
     });
 </script>
 </body>
