@@ -30,7 +30,6 @@
             --scrollbar-bg: #1a1a22;
             --scrollbar-thumb: #2a2a30;
         }
-
         [data-theme="light"] {
             --bg-primary: #f0f0f4;
             --bg-secondary: #e8e8ec;
@@ -51,27 +50,11 @@
             --scrollbar-bg: #e8e8ec;
             --scrollbar-thumb: #d0d0d8;
         }
-
-        /* ===== СКРОЛЛБАР ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--scrollbar-bg);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--scrollbar-thumb);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6a8cff;
-        }
-
-        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        * { -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-bg); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6a8cff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
             background: var(--bg-primary);
             color: var(--text-secondary);
@@ -88,49 +71,15 @@
             align-items: center;
             border-bottom: 1px solid var(--border-color);
             position: relative;
+            z-index: 50;
         }
-        .burger-menu {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            padding: 12px 12px 12px 0;
-            z-index: 100;
-            -webkit-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .burger-menu span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: var(--text-secondary);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .burger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .burger-menu.active span:nth-child(2) {
-            opacity: 0;
-            transform: scale(0);
-        }
-        .burger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            color: var(--text-primary);
-            margin-left: 10px;
-            flex: 1;
-        }
+        .burger-menu { display: flex; flex-direction: column; cursor: pointer; gap: 5px; padding: 12px 12px 12px 0; z-index: 100; user-select: none; touch-action: manipulation; }
+        .burger-menu span { display: block; width: 28px; height: 3px; background: var(--text-secondary); border-radius: 3px; transition: all 0.3s ease; pointer-events: none; }
+        .burger-menu.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger-menu.active span:nth-child(2) { opacity: 0; transform: scale(0); }
+        .burger-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: 3px; color: var(--text-primary); margin-left: 10px; flex: 1; }
         .logo span { font-weight: 400; color: var(--text-muted); }
-
         .theme-toggle {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -141,1123 +90,152 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            -webkit-user-select: none;
             user-select: none;
             touch-action: manipulation;
         }
-        .theme-toggle:hover {
-            border-color: #6a8cff;
-        }
-        .theme-toggle .icon {
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-        .theme-toggle .label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
+        .theme-toggle:hover { border-color: #6a8cff; }
+        .theme-toggle .icon { font-size: 1.2rem; line-height: 1; }
+        .theme-toggle .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
         .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            margin-top: 8px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 8px 0;
-            min-width: 200px;
-            display: none;
-            flex-direction: column;
-            z-index: 99;
+            position: absolute; top: 100%; left: 0; margin-top: 8px;
+            background: var(--bg-secondary); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 8px 0; min-width: 200px;
+            display: none; flex-direction: column; z-index: 99;
         }
         .dropdown-menu.open { display: flex; }
         .dropdown-menu a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 12px 20px;
-            font-weight: 400;
-            transition: background 0.15s ease;
-            -webkit-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
+            color: var(--text-secondary); text-decoration: none; padding: 12px 20px;
+            font-weight: 400; transition: background 0.15s ease; user-select: none;
+            touch-action: manipulation; font-size: 0.95rem; letter-spacing: 0.5px;
             border-left: 3px solid transparent;
+            cursor: pointer;
         }
-        .dropdown-menu a:hover {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-left-color: #6a8cff;
-        }
-        .dropdown-menu a.active-link {
-            color: var(--text-primary);
-            border-left-color: #6a8cff;
-            background: rgba(106, 140, 255, 0.06);
-        }
-        @media (hover: none) {
-            .dropdown-menu a:active {
-                background: var(--bg-hover);
-                color: var(--text-primary);
-                border-left-color: #6a8cff;
-            }
-        }
-
-        .content { padding: 40px 0; }
-        
-        .page {
-            display: none;
-            animation: fadePage 0.3s ease forwards;
-        }
-        .page.active {
-            display: block;
-        }
-        @keyframes fadePage {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .page-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--text-primary);
-        }
+        .dropdown-menu a:hover { background: var(--bg-hover); color: var(--text-primary); border-left-color: #6a8cff; }
+        .dropdown-menu a.active-link { color: var(--text-primary); border-left-color: #6a8cff; background: rgba(106, 140, 255, 0.06); }
+        .content { padding: 30px 0 40px; }
+        .page { display: none; animation: fadePage 0.3s ease forwards; }
+        .page.active { display: block; }
+        @keyframes fadePage { from { opacity: 0; } to { opacity: 1; } }
+        .page-title { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 2rem; margin-bottom: 30px; color: var(--text-primary); }
         .page-title span { color: #6a8cff; }
-        .home-hero { padding: 40px 0; }
-        .home-hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 3rem;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-        }
-        .home-hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-
-        /* ===== ИГРЫ ===== */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 10px 0;
-        }
+        .home-hero { padding: 20px 0; }
+        .home-hero h1 { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 3rem; color: var(--text-primary); margin-bottom: 20px; }
+        .home-hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; line-height: 1.7; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 10px 0; }
         .game-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-            cursor: pointer;
-        }
-        .game-card:hover {
-            border-color: #6a8cff;
-            background: var(--bg-hover);
-            transform: translateY(-3px);
-        }
-        .game-card .game-screenshot {
-            width: 100%;
-            height: 180px;
-            background: var(--bg-input);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-        .game-card .game-screenshot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .game-card .game-screenshot .no-image {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            color: rgba(255,255,255,0.10);
-            text-transform: uppercase;
-            user-select: none;
-        }
-        .game-card .game-info {
-            padding: 16px 18px 18px;
-        }
-        .game-card .game-info .game-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        .game-card .game-info .game-title span {
-            color: #6a8cff;
-        }
-        .game-card .game-info .game-meta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 4px 0 6px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-        .game-card .game-info .game-meta .badge {
-            background: #6a8cff;
-            color: #fff;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .game-card .game-info .game-meta .year {
-            color: #6a8cff;
-            font-weight: 600;
-        }
-        .game-card .game-info .game-description {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin-top: 4px;
-        }
-
-        /* ===== НОВОСТИ ===== */
-        .news-list { display: flex; flex-direction: column; gap: 0; }
-        .news-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px 18px;
-            border-bottom: 1px solid var(--border-light);
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-        .news-item:first-child {
-            border-top: 1px solid var(--border-light);
-        }
-        .news-item:hover {
-            background: var(--bg-hover);
-        }
-        .news-item .news-date {
-            font-size: 0.7rem;
-            color: #6a8cff;
-            font-weight: 600;
-            min-width: 60px;
-            padding-top: 2px;
-        }
-        .news-item .news-content {
-            flex: 1;
-        }
-        .news-item .news-content h4 {
-            font-size: 1rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin: 0 0 4px 0;
-            line-height: 1.4;
-        }
-        .news-item .news-content .news-preview {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-        .news-item .news-content .read-more {
-            color: #6a8cff;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 6px;
-        }
-        .news-item .news-content .read-more:hover {
-            text-decoration: underline;
-        }
-        .news-item .news-image {
-            max-width: 100px;
-            max-height: 70px;
-            border-radius: 6px;
-            object-fit: cover;
-            flex-shrink: 0;
-            margin: 0;
-        }
-        .news-item .news-sticker {
-            max-width: 60px;
-            max-height: 60px;
-            border-radius: 8px;
-            margin-top: 6px;
-        }
-
-        /* ===== ГОЛОСОВАНИЯ ===== */
-        .polls-list { display: flex; flex-direction: column; gap: 0; }
-        .poll-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 16px 18px;
-            border-bottom: 1px solid var(--border-light);
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-        .poll-item:first-child {
-            border-top: 1px solid var(--border-light);
-        }
-        .poll-item:hover {
-            background: var(--bg-hover);
-        }
-        .poll-item .poll-date {
-            font-size: 0.7rem;
-            color: #6a8cff;
-            font-weight: 600;
-            min-width: 60px;
-            padding-top: 2px;
-        }
-        .poll-item .poll-content {
-            flex: 1;
-        }
-        .poll-item .poll-content h4 {
-            font-size: 1rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin: 0 0 4px 0;
-            line-height: 1.4;
-        }
-        .poll-item .poll-content .poll-preview {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-        .poll-item .poll-content .poll-vote-btn {
-            color: #6a8cff;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 6px;
-        }
-        .poll-item .poll-content .poll-vote-btn:hover {
-            text-decoration: underline;
-        }
-        .poll-item .poll-sticker {
-            max-width: 60px;
-            max-height: 60px;
-            border-radius: 8px;
-            margin-top: 6px;
-        }
-
-        /* ===== ОВЕРЛЕЙ НОВОСТИ ===== */
-        .news-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(14, 14, 18, 0.96);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 40px 20px;
-            animation: fadePage 0.25s ease;
-        }
-        .news-overlay.open {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        .news-overlay .overlay-content {
-            max-width: 720px;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            position: relative;
-            margin: auto;
-        }
-        .news-overlay .close-overlay {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.05);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            z-index: 10;
-            touch-action: manipulation;
-        }
-        .news-overlay .close-overlay:hover {
-            background: rgba(255,255,255,0.08);
-        }
-        .news-overlay .close-overlay span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--text-secondary);
-            border-radius: 2px;
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-        .news-overlay .close-overlay span:nth-child(1) {
-            transform: rotate(45deg);
-        }
-        .news-overlay .close-overlay span:nth-child(2) {
-            transform: rotate(-45deg);
-        }
-        .news-overlay .overlay-news-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-        .news-overlay .overlay-news-date {
-            color: #6a8cff;
-            font-size: 0.85rem;
-            margin-bottom: 14px;
-            display: block;
-        }
-        .news-overlay .overlay-news-content {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        .news-overlay .overlay-news-content p {
-            margin-bottom: 10px;
-        }
-        .news-overlay .overlay-news-image {
-            width: 100%;
-            max-height: 280px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 14px;
-        }
-        .news-overlay .overlay-news-sticker {
-            max-width: 80px;
-            max-height: 80px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        /* ===== ОВЕРЛЕЙ ГОЛОСОВАНИЯ ===== */
-        .poll-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(14, 14, 18, 0.96);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 40px 20px;
-            animation: fadePage 0.25s ease;
-        }
-        .poll-overlay.open {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        .poll-overlay .overlay-content {
-            max-width: 720px;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            position: relative;
-            margin: auto;
-        }
-        .poll-overlay .close-overlay {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.05);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            z-index: 10;
-            touch-action: manipulation;
-        }
-        .poll-overlay .close-overlay:hover {
-            background: rgba(255,255,255,0.08);
-        }
-        .poll-overlay .close-overlay span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--text-secondary);
-            border-radius: 2px;
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-        .poll-overlay .close-overlay span:nth-child(1) {
-            transform: rotate(45deg);
-        }
-        .poll-overlay .close-overlay span:nth-child(2) {
-            transform: rotate(-45deg);
-        }
-        .poll-overlay .overlay-poll-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: var(--text-primary);
-            margin-bottom: 6px;
-        }
-        .poll-overlay .overlay-poll-question {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .poll-overlay .overlay-poll-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            margin-bottom: 8px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-            background: var(--poll-bg);
-            border: 1px solid var(--poll-border);
-            position: relative;
-            overflow: hidden;
-        }
-        .poll-overlay .overlay-poll-option:hover:not(.disabled) {
-            background: var(--poll-hover);
-            border-color: #4a4a5a;
-        }
-        .poll-overlay .overlay-poll-option.voted {
-            border-color: #6a8cff;
-            background: rgba(106, 140, 255, 0.06);
-        }
-        .poll-overlay .overlay-poll-option .poll-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: rgba(106, 140, 255, 0.06);
-            border-radius: 12px;
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-        .poll-overlay .overlay-poll-option .poll-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            z-index: 1;
-            flex: 1;
-        }
-        .poll-overlay .overlay-poll-option .poll-radio {
-            width: 20px !important;
-            height: 20px !important;
-            border-radius: 50% !important;
-            border: 2px solid #4a4a5a !important;
-            background: transparent !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            flex-shrink: 0 !important;
-            transition: border-color 0.2s ease, background 0.2s ease !important;
-        }
-        .poll-overlay .overlay-poll-option:hover:not(.disabled) .poll-radio {
-            border-color: #6a8cff !important;
-        }
-        .poll-overlay .overlay-poll-option.voted .poll-radio {
-            border-color: #6a8cff !important;
-            background: #6a8cff !important;
-        }
-        .poll-overlay .overlay-poll-option.voted .poll-radio::after {
-            content: '' !important;
-            width: 8px !important;
-            height: 8px !important;
-            border-radius: 50% !important;
-            background: #fff !important;
-            display: block !important;
-        }
-        .poll-overlay .overlay-poll-option .poll-text {
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        .poll-overlay .overlay-poll-option .poll-votes-count {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            margin-left: auto;
-            white-space: nowrap;
-        }
-        .poll-overlay .overlay-poll-option .poll-percent {
-            color: #6a8cff;
-            font-size: 0.85rem;
-            font-weight: 600;
-            min-width: 44px;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .poll-overlay .poll-total {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            margin-top: 12px;
-            text-align: right;
-            border-top: 1px solid var(--border-light);
-            padding-top: 12px;
-        }
-        .poll-overlay .poll-message {
-            color: #6a8cff;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            background: rgba(106, 140, 255, 0.04);
-            border: 1px solid rgba(106, 140, 255, 0.08);
-        }
-        .poll-overlay .overlay-poll-option.disabled {
-            cursor: default;
-            opacity: 0.85;
-        }
-        .poll-overlay .overlay-poll-option.disabled:hover {
-            background: var(--poll-bg);
-            border-color: var(--poll-border);
-        }
-        .poll-overlay .overlay-poll-images {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-        .poll-overlay .overlay-poll-images img {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            flex: 1;
-            min-width: 80px;
-            object-fit: cover;
-        }
-        .poll-overlay .overlay-poll-sticker {
-            max-width: 80px;
-            max-height: 80px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        /* ===== ОСНОВНЫЕ ГОЛОСОВАНИЯ ===== */
-        .poll-container {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px 24px 24px;
-            border: 1px solid var(--border-color);
-            transition: border-color 0.2s ease;
-            margin-bottom: 16px;
-        }
-        .poll-container:hover {
-            border-color: var(--poll-border);
-        }
-        .poll-container .poll-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-        .poll-container .poll-header .poll-icon {
-            font-size: 1.3rem;
-            color: #6a8cff;
-        }
-        .poll-container .poll-header .poll-question {
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-            flex: 1;
-        }
-        .poll-container .poll-images {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-        .poll-container .poll-images img {
-            max-width: 100%;
-            max-height: 180px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            flex: 1;
-            min-width: 100px;
-            object-fit: cover;
-        }
-        .poll-container .poll-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            margin-bottom: 6px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-            background: var(--poll-bg);
-            border: 1px solid var(--poll-border);
-            position: relative;
-            overflow: hidden;
-        }
-        .poll-container .poll-option:hover:not(.disabled) {
-            background: var(--poll-hover);
-            border-color: #4a4a5a;
-        }
-        .poll-container .poll-option.voted {
-            border-color: #6a8cff;
-            background: rgba(106, 140, 255, 0.06);
-        }
-        .poll-container .poll-option .poll-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: rgba(106, 140, 255, 0.06);
-            border-radius: 10px;
-            transition: width 0.4s ease;
-            width: 0%;
-        }
-        .poll-container .poll-option .poll-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            z-index: 1;
-            flex: 1;
-        }
-        .poll-container .poll-option .poll-radio {
-            width: 20px !important;
-            height: 20px !important;
-            border-radius: 50% !important;
-            border: 2px solid #4a4a5a !important;
-            background: transparent !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            flex-shrink: 0 !important;
-            transition: border-color 0.2s ease, background 0.2s ease !important;
-        }
-        .poll-container .poll-option:hover:not(.disabled) .poll-radio {
-            border-color: #6a8cff !important;
-        }
-        .poll-container .poll-option.voted .poll-radio {
-            border-color: #6a8cff !important;
-            background: #6a8cff !important;
-        }
-        .poll-container .poll-option.voted .poll-radio::after {
-            content: '' !important;
-            width: 8px !important;
-            height: 8px !important;
-            border-radius: 50% !important;
-            background: #fff !important;
-            display: block !important;
-        }
-        .poll-container .poll-option .poll-text {
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        .poll-container .poll-option .poll-votes-count {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            margin-left: auto;
-            white-space: nowrap;
-        }
-        .poll-container .poll-option .poll-percent {
-            color: #6a8cff;
-            font-size: 0.85rem;
-            font-weight: 600;
-            min-width: 44px;
-            text-align: right;
-            white-space: nowrap;
-        }
-        .poll-container .poll-total {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            margin-top: 12px;
-            text-align: right;
-            border-top: 1px solid var(--border-light);
-            padding-top: 12px;
-        }
-        .poll-container .poll-message {
-            color: #6a8cff;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            text-align: center;
-            padding: 8px;
-            border-radius: 8px;
-            background: rgba(106, 140, 255, 0.04);
-            border: 1px solid rgba(106, 140, 255, 0.08);
-        }
-        .poll-container .poll-option.disabled {
-            cursor: default;
-            opacity: 0.85;
-        }
-        .poll-container .poll-option.disabled:hover {
-            background: var(--poll-bg);
-            border-color: var(--poll-border);
-        }
-
-        .game-page-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(14, 14, 18, 0.96);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 40px 20px;
-            animation: fadePage 0.25s ease;
-        }
-        .game-page-overlay.open {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        .game-page-overlay .overlay-content {
-            max-width: 800px;
-            width: 100%;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            position: relative;
-            margin: auto;
-        }
-        .game-page-overlay .close-overlay {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.05);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
-            z-index: 10;
-            touch-action: manipulation;
-        }
-        .game-page-overlay .close-overlay:hover {
-            background: rgba(255,255,255,0.08);
-        }
-        .game-page-overlay .close-overlay span {
-            display: block;
-            width: 20px;
-            height: 2px;
-            background: var(--text-secondary);
-            border-radius: 2px;
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-        .game-page-overlay .close-overlay span:nth-child(1) {
-            transform: rotate(45deg);
-        }
-        .game-page-overlay .close-overlay span:nth-child(2) {
-            transform: rotate(-45deg);
-        }
-        .game-page-overlay .overlay-image {
-            width: 100%;
-            height: 250px;
-            background: var(--bg-input);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-        .game-page-overlay .overlay-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .game-page-overlay .overlay-image .no-image {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            letter-spacing: 4px;
-            color: rgba(255,255,255,0.10);
-            text-transform: uppercase;
-            user-select: none;
-        }
-        .game-page-overlay .overlay-title {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-        .game-page-overlay .overlay-title span {
-            color: #6a8cff;
-        }
-        .game-page-overlay .overlay-meta {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        .game-page-overlay .overlay-meta .badge {
-            background: #6a8cff;
-            color: #fff;
-            padding: 2px 14px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .game-page-overlay .overlay-meta .year {
-            color: #6a8cff;
-            font-weight: 600;
-        }
-        .game-page-overlay .overlay-description {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin: 12px 0 24px;
-        }
-        .game-page-overlay .overlay-description p {
-            margin-bottom: 10px;
-        }
-        .game-page-overlay .overlay-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-        .game-page-overlay .overlay-links .btn {
-            display: inline-block;
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            font-weight: 600;
-            padding: 10px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border: 1px solid var(--border-color);
-            transition: background 0.2s ease, border-color 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-        .game-page-overlay .overlay-links .btn:hover {
-            background: var(--bg-hover);
-            border-color: #6a8cff;
-        }
-        .game-page-overlay .overlay-links .btn.primary {
-            background: #6a8cff;
-            border-color: #6a8cff;
-            color: #fff;
-        }
-        .game-page-overlay .overlay-links .btn.primary:hover {
-            background: #5a7cee;
-            border-color: #5a7cee;
-        }
-
-        .empty-news {
-            padding: 60px 20px;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            border: 1px dashed var(--border-color);
-            border-radius: 12px;
-            text-align: center;
-        }
+            background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color);
+            overflow: hidden; transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+            cursor: pointer; text-decoration: none; color: inherit; display: block;
+        }
+        .game-card:hover { border-color: #6a8cff; background: var(--bg-hover); transform: translateY(-3px); }
+        .game-card .game-screenshot { width: 100%; height: 180px; background: var(--bg-input); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-color); overflow: hidden; }
+        .game-card .game-screenshot img { width: 100%; height: 100%; object-fit: cover; }
+        .game-card .game-screenshot .no-image { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.2rem; letter-spacing: 4px; color: rgba(255,255,255,0.10); text-transform: uppercase; user-select: none; }
+        .game-card .game-info { padding: 16px 18px 18px; }
+        .game-card .game-info .game-title { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; color: var(--text-primary); margin-bottom: 4px; }
+        .game-card .game-info .game-meta { display: flex; gap: 10px; flex-wrap: wrap; margin: 4px 0 6px; font-size: 0.75rem; color: var(--text-muted); }
+        .game-card .game-info .game-meta .badge { background: #6a8cff; color: #fff; padding: 2px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .game-card .game-info .game-meta .year { color: #6a8cff; font-weight: 600; }
+        .game-card .game-info .game-description { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+        .news-list, .polls-list { display: flex; flex-direction: column; gap: 0; }
+        .news-item, .poll-item {
+            display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px;
+            border-bottom: 1px solid var(--border-light); cursor: pointer; transition: background 0.15s ease;
+            text-decoration: none; color: inherit;
+        }
+        .news-item:first-child, .poll-item:first-child { border-top: 1px solid var(--border-light); }
+        .news-item:hover, .poll-item:hover { background: var(--bg-hover); }
+        .news-item .news-date, .poll-item .poll-date { font-size: 0.7rem; color: #6a8cff; font-weight: 600; min-width: 60px; padding-top: 2px; }
+        .news-item .news-content, .poll-item .poll-content { flex: 1; }
+        .news-item .news-content h4, .poll-item .poll-content h4 { font-size: 1rem; color: var(--text-primary); font-weight: 600; margin: 0 0 4px 0; line-height: 1.4; }
+        .news-item .news-content .news-preview, .poll-item .poll-content .poll-preview { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+        .read-more, .poll-vote-btn { color: #6a8cff; font-size: 0.8rem; font-weight: 500; display: inline-block; margin-top: 6px; }
+        .news-image { max-width: 100px; max-height: 70px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
+        .news-sticker, .poll-sticker { max-width: 60px; max-height: 60px; border-radius: 8px; margin-top: 6px; }
+        .empty-news { padding: 60px 20px; color: var(--text-muted); font-size: 1.1rem; border: 1px dashed var(--border-color); border-radius: 12px; text-align: center; }
         .empty-news span { font-size: 2.5rem; display: block; margin-bottom: 12px; }
-        .empty-news .spinner {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            border: 3px solid var(--border-color);
-            border-top: 3px solid #6a8cff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        footer {
-            padding: 20px 0;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 20px;
-            text-align: center;
-        }
+        .spinner { display: inline-block; width: 35px; height: 35px; border: 3px solid var(--border-color); border-top: 3px solid #6a8cff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        footer { padding: 20px 0; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem; margin-top: 20px; text-align: center; }
         footer a { color: #6a8cff; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
-
-        /* ===== КОММЕНТАРИИ ===== */
-        .comments-section {
-            margin-top: 30px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-        .comments-section .comments-title {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .comments-section .comment {
-            background: var(--comment-bg);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            border: 1px solid var(--comment-border);
-        }
-        .comments-section .comment .comment-author {
-            font-weight: 600;
-            color: #6a8cff;
-            font-size: 0.9rem;
-        }
-        .comments-section .comment .comment-time {
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            margin-left: 8px;
-        }
-        .comments-section .comment .comment-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 4px;
-        }
-        .comments-section .comment-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 16px;
-        }
-        .comments-section .comment-form .form-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .comments-section .comment-form input,
-        .comments-section .comment-form textarea {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 14px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            width: 100%;
-            transition: border 0.3s;
-        }
-        .comments-section .comment-form input:focus,
-        .comments-section .comment-form textarea:focus {
-            outline: none;
-            border-color: #6a8cff;
-        }
-        .comments-section .comment-form input {
-            flex: 1;
-            min-width: 150px;
-        }
-        .comments-section .comment-form textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-        .comments-section .comment-form .comment-btn {
-            background: #6a8cff;
-            border: none;
-            color: #fff;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background 0.2s;
-            font-size: 0.9rem;
-            align-self: flex-start;
-        }
-        .comments-section .comment-form .comment-btn:hover {
-            background: #5a7cee;
-        }
-        .comments-section .comment-form .comment-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .comments-section .no-comments {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 20px 0;
-        }
-
+        .poll-container { background: var(--bg-card); border-radius: 16px; padding: 20px 24px; border: 1px solid var(--border-color); margin-bottom: 16px; }
+        .poll-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .poll-icon { font-size: 1.3rem; color: #6a8cff; }
+        .poll-question { color: var(--text-primary); font-size: 1rem; font-weight: 600; }
+        .poll-option { display: flex; align-items: center; gap: 12px; padding: 10px 16px; margin-bottom: 6px; border-radius: 10px; cursor: pointer; background: var(--poll-bg); border: 1px solid var(--poll-border); transition: background 0.2s, border-color 0.2s; position: relative; overflow: hidden; }
+        .poll-option:hover:not(.disabled) { background: var(--poll-hover); border-color: #4a4a5a; }
+        .poll-option.voted { border-color: #6a8cff; background: rgba(106, 140, 255, 0.06); }
+        .poll-bar { position: absolute; top: 0; left: 0; height: 100%; background: rgba(106, 140, 255, 0.06); border-radius: 10px; transition: width 0.4s; width: 0%; }
+        .poll-label { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; flex: 1; }
+        .poll-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #4a4a5a; background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
+        .poll-option:hover:not(.disabled) .poll-radio { border-color: #6a8cff; }
+        .poll-option.voted .poll-radio { border-color: #6a8cff; background: #6a8cff; }
+        .poll-option.voted .poll-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; display: block; }
+        .poll-text { color: var(--text-primary); font-size: 0.95rem; font-weight: 500; }
+        .poll-votes-count { color: var(--text-muted); font-size: 0.7rem; margin-left: auto; white-space: nowrap; }
+        .poll-percent { color: #6a8cff; font-size: 0.85rem; font-weight: 600; min-width: 44px; text-align: right; white-space: nowrap; }
+        .poll-total { color: var(--text-muted); font-size: 0.75rem; margin-top: 12px; text-align: right; border-top: 1px solid var(--border-light); padding-top: 12px; }
+        .poll-message { color: #6a8cff; font-size: 0.85rem; margin-top: 10px; text-align: center; padding: 8px; border-radius: 8px; background: rgba(106, 140, 255, 0.04); border: 1px solid rgba(106, 140, 255, 0.08); }
+        .disabled { cursor: default; opacity: 0.85; }
+        .comments-section { margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .comments-title { font-size: 1.1rem; color: var(--text-primary); font-weight: 600; margin-bottom: 16px; }
+        .comment { background: var(--comment-bg); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; border: 1px solid var(--comment-border); }
+        .comment-author { font-weight: 600; color: #6a8cff; font-size: 0.9rem; }
+        .comment-time { color: var(--text-muted); font-size: 0.7rem; margin-left: 8px; }
+        .comment-text { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+        .comment-form { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+        .form-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .comment-form input, .comment-form textarea { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 0.9rem; width: 100%; transition: border 0.3s; }
+        .comment-form input:focus, .comment-form textarea:focus { outline: none; border-color: #6a8cff; }
+        .comment-form input { flex: 1; min-width: 150px; }
+        .comment-form textarea { resize: vertical; min-height: 60px; }
+        .comment-btn { background: #6a8cff; border: none; color: #fff; font-weight: 600; padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; align-self: flex-start; }
+        .comment-btn:hover { background: #5a7cee; }
+        .comment-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .no-comments { color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 20px 0; }
+        .share-buttons { display: flex; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
+        .share-btn { background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .share-btn:hover { border-color: #6a8cff; color: var(--text-primary); }
+        .breadcrumb { margin-bottom: 20px; font-size: 0.9rem; color: var(--text-muted); }
+        .breadcrumb a { color: #6a8cff; text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb svg { width: 18px; height: 18px; fill: none; stroke: #6a8cff; stroke-width: 2; }
+        .detail-title { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--text-primary); margin-bottom: 10px; }
+        .detail-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+        .detail-meta .badge { background: #6a8cff; color: #fff; padding: 2px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-meta .year { color: #6a8cff; font-weight: 600; font-size: 0.85rem; }
+        .detail-image { width: 100%; max-height: 320px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+        .detail-content { color: var(--text-secondary); margin: 10px 0 20px; line-height: 1.8; }
+        .detail-content p { margin-bottom: 10px; }
         @media (max-width: 768px) {
             .logo { font-size: 1.4rem; }
             .home-hero h1 { font-size: 2.2rem; }
             .burger-menu span { width: 24px; height: 2.5px; }
             .game-card .game-screenshot { height: 150px; }
-            .game-page-overlay .overlay-image { height: 180px; }
-            .game-page-overlay .overlay-title { font-size: 1.5rem; }
             .games-grid { grid-template-columns: 1fr; }
-            .dropdown-menu a { font-size: 0.9rem; padding: 14px 20px; }
-            .news-item { padding: 12px 14px; gap: 12px; flex-wrap: wrap; }
-            .news-item .news-date { min-width: 50px; font-size: 0.65rem; }
-            .news-item .news-content h4 { font-size: 0.9rem; }
-            .news-item .news-image { max-width: 80px; max-height: 60px; }
-            .poll-item { padding: 12px 14px; gap: 12px; flex-wrap: wrap; }
-            .poll-item .poll-date { min-width: 50px; font-size: 0.65rem; }
-            .poll-item .poll-content h4 { font-size: 0.9rem; }
-            .poll-overlay .overlay-poll-title { font-size: 1.3rem; }
-            .poll-overlay .overlay-poll-option { padding: 8px 12px; flex-wrap: wrap; gap: 8px; }
-            .poll-overlay .overlay-poll-option .poll-label { flex-wrap: wrap; gap: 4px; }
-            .poll-overlay .overlay-poll-option .poll-votes-count { margin-left: 0; }
-            .poll-overlay .overlay-poll-option .poll-percent { min-width: 34px; }
-            .poll-overlay .overlay-poll-images img { max-height: 140px; }
-            .news-item:first-child { border-top: none; }
-            .poll-item:first-child { border-top: none; }
-            .comments-section .comment-form .form-row { flex-direction: column; }
+            .news-item, .poll-item { padding: 12px 14px; gap: 12px; flex-wrap: wrap; }
+            .news-item .news-date, .poll-item .poll-date { min-width: 50px; font-size: 0.65rem; }
+            .news-image { max-width: 80px; max-height: 60px; }
             .theme-toggle .label { display: none; }
+            .detail-title { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <div class="burger-menu" id="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <div class="burger-menu" id="burger"><span></span><span></span><span></span></div>
         <div class="logo">INORS <span>GAMES</span></div>
-        
-        <!-- ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== -->
         <div class="theme-toggle" id="themeToggle" title="Переключить тему">
             <span class="icon" id="themeIcon">🌙</span>
             <span class="label" id="themeLabel">Тёмная</span>
         </div>
-        
         <nav class="dropdown-menu" id="dropdownMenu">
-            <a href="#" data-page="home" class="active-link">Главная</a>
-            <a href="#" data-page="games">Игры</a>
-            <a href="#" data-page="news">Новости</a>
-            <a href="#" data-page="polls">Голосования</a>
+            <a data-page="home" class="active-link">Главная</a>
+            <a data-page="games">Игры</a>
+            <a data-page="news">Новости</a>
+            <a data-page="polls">Голосования</a>
         </nav>
     </header>
 
@@ -1272,705 +250,70 @@
         <div id="page-games" class="page">
             <h2 class="page-title">Наши <span>игры</span></h2>
             <div id="gamesContainer">
-                <div class="empty-news">
-                    <div class="spinner"></div>
-                    <span style="font-size:1rem; margin-top:10px;">Загрузка игр...</span>
-                </div>
+                <div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка игр...</span></div>
             </div>
         </div>
 
         <div id="page-news" class="page">
             <h2 class="page-title">Новости <span>команды</span></h2>
             <div id="newsContainer">
-                <div class="empty-news">
-                    <div class="spinner"></div>
-                    <span style="font-size:1rem; margin-top:10px;">Загрузка новостей...</span>
-                </div>
+                <div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка новостей...</span></div>
             </div>
         </div>
 
         <div id="page-polls" class="page">
             <h2 class="page-title">Голосования <span>команды</span></h2>
             <div id="pollsContainer">
-                <div class="empty-news">
-                    <div class="spinner"></div>
-                    <span style="font-size:1rem; margin-top:10px;">Загрузка голосований...</span>
-                </div>
+                <div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка голосований...</span></div>
             </div>
         </div>
     </div>
 
-    <footer>
-        © 2026 Inors Games · <a href="https://t.me/life_in_russia_simulator" target="_blank">Telegram</a>
-    </footer>
-</div>
-
-<!-- ===== ОВЕРЛЕИ ===== -->
-<div class="game-page-overlay" id="gamePageOverlay">
-    <div class="overlay-content">
-        <button class="close-overlay" id="closeGamePage">
-            <span></span>
-            <span></span>
-        </button>
-        <div id="gameOverlayContent"></div>
-    </div>
-</div>
-
-<div class="news-overlay" id="newsOverlay">
-    <div class="overlay-content">
-        <button class="close-overlay" id="closeNewsOverlay">
-            <span></span>
-            <span></span>
-        </button>
-        <div id="newsOverlayContent"></div>
-    </div>
-</div>
-
-<div class="poll-overlay" id="pollOverlay">
-    <div class="overlay-content">
-        <button class="close-overlay" id="closePollOverlay">
-            <span></span>
-            <span></span>
-        </button>
-        <div id="pollOverlayContent"></div>
-    </div>
+    <footer>© 2026 Inors Games · <a href="https://t.me/life_in_russia_simulator" target="_blank">Telegram</a></footer>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // ============================================================
-        // 🌓 ТЕМА (автоопределение + ручное переключение)
-        // ============================================================
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeLabel = document.getElementById('themeLabel');
-        const html = document.documentElement;
-
-        // Определяем системную тему
-        function getSystemTheme() {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-
-        // Получаем сохранённую тему или системную
-        function getCurrentTheme() {
-            const saved = localStorage.getItem('inors-theme');
-            if (saved === 'dark' || saved === 'light') return saved;
-            return getSystemTheme();
-        }
-
-        // Применяем тему
-        function setTheme(theme) {
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('inors-theme', theme);
-            
-            if (theme === 'dark') {
-                themeIcon.textContent = '🌙';
-                themeLabel.textContent = 'Тёмная';
-            } else {
-                themeIcon.textContent = '☀️';
-                themeLabel.textContent = 'Светлая';
-            }
-        }
-
-        // Переключение темы
-        function toggleTheme() {
-            const current = html.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            setTheme(next);
-        }
-
-        // Инициализация
-        const initialTheme = getCurrentTheme();
-        setTheme(initialTheme);
-
-        // Слушатель на переключение системной темы
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            // Если пользователь не сохранял тему вручную — обновляем
-            if (!localStorage.getItem('inors-theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                setTheme(newTheme);
-            }
-        });
-
-        themeToggle.addEventListener('click', toggleTheme);
-        themeToggle.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            toggleTheme();
-        }, { passive: false });
-
-        // ============================================================
-        // 🔧 ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-        // ============================================================
-        function formatDateShort(dateStr) {
-            if (!dateStr) return '';
-            try {
-                const date = new Date(dateStr);
-                if (isNaN(date.getTime())) return dateStr;
-                const now = new Date();
-                const diff = Math.floor((now - date) / (1000 * 60));
-                if (diff < 1) return 'Только что';
-                if (diff < 60) return diff + ' мин';
-                if (diff < 1440) return Math.floor(diff / 60) + ' ч';
-                if (diff < 43200) return Math.floor(diff / 1440) + ' д';
-                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-            } catch { return dateStr; }
-        }
-
-        function formatDate(dateStr) {
-            if (!dateStr) return 'Без даты';
-            try {
-                const date = new Date(dateStr);
-                if (isNaN(date.getTime())) return dateStr;
-                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-            } catch { return dateStr; }
-        }
-
-        async function getIP() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch (e) {
-                console.warn('Не удалось определить IP');
-                return 'unknown';
-            }
-        }
-
-        function containsLink(text) {
-            const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/gi;
-            return urlRegex.test(text);
-        }
-
-        // ============================================================
-        // 🎮 ИГРЫ
-        // ============================================================
-        let allGamesData = [];
+    (function() {
+        // ===== SUPABASE =====
         const SUPABASE_URL = 'https://cdmzvyfsuyzqqnekuzfa.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkbXp2eWZzdXl6cXFuZWt1emZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNzE4MDgsImV4cCI6MjEwMzk0NzgwOH0.oBjQXyu4YrzXstdUI-CnPWgE_tHVwSIuBmj1_8wnbrI';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function loadGames() {
-            const container = document.getElementById('gamesContainer');
-            if (!container) return;
-            try {
-                const { data, error } = await supabase.from('games').select('*').order('id', { ascending: false });
-                if (error) throw error;
-                allGamesData = data || [];
-                if (data && data.length > 0) {
-                    renderGames(data);
-                } else {
-                    container.innerHTML = `<div class="empty-news"><span>🎮</span>Игр пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
-                }
-            } catch (e) {
-                console.error('Ошибка загрузки игр:', e);
-                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки игр</div>`;
-            }
+        // ===== ТЕМА =====
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+        const html = document.documentElement;
+        function getSystemTheme() { return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        function getCurrentTheme() { const saved = localStorage.getItem('inors-theme'); return saved ? saved : getSystemTheme(); }
+        function setTheme(theme) {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('inors-theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+            themeLabel.textContent = theme === 'dark' ? 'Тёмная' : 'Светлая';
         }
+        setTheme(getCurrentTheme());
+        themeToggle.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(next);
+        });
 
-        function renderGames(gamesArray) {
-            const container = document.getElementById('gamesContainer');
-            if (!container || !gamesArray || gamesArray.length === 0) {
-                container.innerHTML = `<div class="empty-news"><span>🎮</span>Игр пока нет.</div>`;
-                return;
-            }
-            let html = '<div class="games-grid">';
-            gamesArray.forEach(game => {
-                const hasImage = game.image_url && game.image_url.trim() !== '';
-                html += `
-                    <div class="game-card" data-game-id="${game.id}">
-                        <div class="game-screenshot">${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}</div>
-                        <div class="game-info">
-                            <div class="game-title">${game.title || 'Без названия'}</div>
-                            <div class="game-meta">
-                                ${game.genre ? `<span class="badge">${game.genre}</span>` : ''}
-                                ${game.year ? `<span class="year">${game.year}</span>` : ''}
-                                ${game.platform ? `<span>${game.platform}</span>` : ''}
-                            </div>
-                            <div class="game-description">${game.description || ''}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-            document.querySelectorAll('.game-card').forEach(el => {
-                el.addEventListener('click', function() {
-                    const id = parseInt(this.dataset.gameId);
-                    const game = allGamesData.find(g => g.id === id);
-                    if (game) openGameOverlay(game);
-                });
-            });
+        // ===== ВСПОМОГАТЕЛЬНЫЕ =====
+        function formatDateShort(dateStr) {
+            if(!dateStr) return '';
+            try { const d = new Date(dateStr); if(isNaN(d)) return dateStr; const diff = Math.floor((Date.now() - d) / 60000); if(diff<1) return 'Только что'; if(diff<60) return diff+' мин'; if(diff<1440) return Math.floor(diff/60)+' ч'; if(diff<43200) return Math.floor(diff/1440)+' д'; return d.toLocaleDateString('ru-RU',{day:'numeric',month:'short'}); } catch { return dateStr; }
         }
-
-        const gameOverlay = document.getElementById('gamePageOverlay');
-        const gameOverlayContent = document.getElementById('gameOverlayContent');
-        const closeGameBtn = document.getElementById('closeGamePage');
-
-        function openGameOverlay(game) {
-            const hasImage = game.image_url && game.image_url.trim() !== '';
-            const hasDownload = game.download_link && game.download_link.trim() !== '';
-            let html = `
-                <div class="overlay-image">${hasImage ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy" />` : `<div class="no-image">Фото</div>`}</div>
-                <div class="overlay-title">${game.title || 'Без названия'}</div>
-                <div class="overlay-meta">
-                    ${game.genre ? `<span class="badge">${game.genre}</span>` : ''}
-                    ${game.year ? `<span class="year">${game.year}</span>` : ''}
-                    ${game.platform ? `<span>${game.platform}</span>` : ''}
-                    <span>Inors Games</span>
-                </div>
-                <div class="overlay-description"><p>${game.description || ''}</p></div>
-                <div class="overlay-links">
-                    ${hasDownload ? `<a href="${game.download_link}" target="_blank" class="btn primary">Скачать игру</a>` : ''}
-                    <a href="https://t.me/life_in_russia_simulator" target="_blank" class="btn">Наш Telegram</a>
-                </div>
-            `;
-            gameOverlayContent.innerHTML = html;
-            gameOverlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
+        function formatDate(dateStr) {
+            if(!dateStr) return 'Без даты';
+            try { const d = new Date(dateStr); if(isNaN(d)) return dateStr; return d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}); } catch { return dateStr; }
         }
+        async function getIP() { try { const r = await fetch('https://api.ipify.org?format=json'); const d = await r.json(); return d.ip; } catch(e) { return 'unknown'; } }
+        function containsLink(text) { return /(https?:\/\/[^\s]+|www\.[^\s]+)/gi.test(text); }
 
-        function closeGameOverlay() {
-            gameOverlay.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        closeGameBtn.addEventListener('click', closeGameOverlay);
-        gameOverlay.addEventListener('click', function(e) { if (e.target === gameOverlay) closeGameOverlay(); });
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && gameOverlay.classList.contains('open')) closeGameOverlay(); });
-
-        // ============================================================
-        // 📰 НОВОСТИ
-        // ============================================================
-        let allNewsData = [];
-
-        async function loadNews() {
-            const container = document.getElementById('newsContainer');
-            if (!container) return;
-            try {
-                const { data, error } = await supabase.from('news').select('*').order('date', { ascending: false });
-                if (error) throw error;
-                allNewsData = data || [];
-                if (data && data.length > 0) {
-                    renderNews(data);
-                } else {
-                    container.innerHTML = `<div class="empty-news"><span>📭</span>Новостей пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
-                }
-            } catch (e) {
-                console.error('Ошибка загрузки новостей:', e);
-                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки новостей</div>`;
-            }
-        }
-
-        function renderNews(newsArray) {
-            const container = document.getElementById('newsContainer');
-            if (!container || !newsArray || newsArray.length === 0) {
-                container.innerHTML = `<div class="empty-news"><span>📭</span>Новостей пока нет.</div>`;
-                return;
-            }
-            let html = '<div class="news-list">';
-            newsArray.forEach(item => {
-                const formattedDate = formatDateShort(item.date);
-                const preview = item.content ? item.content.substring(0, 120) + (item.content.length > 120 ? '...' : '') : '';
-                html += `
-                    <div class="news-item" data-news-id="${item.id}">
-                        <div class="news-date">${formattedDate}</div>
-                        <div class="news-content">
-                            <h4>${item.title || 'Без названия'}</h4>
-                            ${preview ? `<div class="news-preview">${preview}</div>` : ''}
-                            <div class="read-more">Читать полностью →</div>
-                            ${item.image_url ? `<img src="${item.image_url}" class="news-image" alt="изображение" loading="lazy" />` : ''}
-                            ${item.sticker ? `<img src="${item.sticker}" class="news-sticker" />` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-            document.querySelectorAll('.news-item').forEach(el => {
-                el.addEventListener('click', function() {
-                    const id = parseInt(this.dataset.newsId);
-                    const news = allNewsData.find(n => n.id === id);
-                    if (news) openNewsOverlay(news);
-                });
-            });
-        }
-
-        const newsOverlay = document.getElementById('newsOverlay');
-        const newsOverlayContent = document.getElementById('newsOverlayContent');
-        const closeNewsOverlayBtn = document.getElementById('closeNewsOverlay');
-
-        async function openNewsOverlay(news) {
-            const formattedDate = formatDate(news.date);
-            const content = news.content || '';
-            const paragraphs = content.split('\n').filter(p => p.trim());
-            let html = `
-                <div class="overlay-news-title">${news.title || 'Без названия'}</div>
-                <span class="overlay-news-date">${formattedDate}</span>
-                ${news.image_url ? `<img src="${news.image_url}" class="overlay-news-image" alt="изображение" loading="lazy" />` : ''}
-                ${news.sticker ? `<img src="${news.sticker}" class="overlay-news-sticker" />` : ''}
-                <div class="overlay-news-content">${paragraphs.map(p => `<p>${p}</p>`).join('')}</div>
-            `;
-            try {
-                const { data: pollData, error } = await supabase.from('polls').select('*').eq('news_id', news.id).single();
-                if (!error && pollData) {
-                    html += renderPoll(pollData);
-                }
-            } catch (e) { console.log('Нет голосования для этой новости'); }
-            html += `
-                <div class="comments-section" id="commentsSection">
-                    <div class="comments-title">Комментарии</div>
-                    <div id="commentsList"></div>
-                    <div class="comment-form">
-                        <div class="form-row"><input type="text" id="commentAuthor" placeholder="Ваше имя" maxlength="30" /></div>
-                        <textarea id="commentText" placeholder="Напишите комментарий..." rows="2"></textarea>
-                        <button class="comment-btn" id="sendCommentBtn" data-news-id="${news.id}">Отправить</button>
-                    </div>
-                </div>
-            `;
-            newsOverlayContent.innerHTML = html;
-            newsOverlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            loadComments(news.id);
-            document.getElementById('sendCommentBtn').addEventListener('click', function() {
-                const newsId = parseInt(this.dataset.newsId);
-                sendComment(newsId);
-            });
-            attachPollHandlers();
-        }
-
-        function closeNewsOverlay() {
-            newsOverlay.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        closeNewsOverlayBtn.addEventListener('click', closeNewsOverlay);
-        newsOverlay.addEventListener('click', function(e) { if (e.target === newsOverlay) closeNewsOverlay(); });
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && newsOverlay.classList.contains('open')) closeNewsOverlay(); });
-
-        // ============================================================
-        // 💬 КОММЕНТАРИИ
-        // ============================================================
-        async function sendComment(newsId) {
-            const authorInput = document.getElementById('commentAuthor');
-            const textInput = document.getElementById('commentText');
-            const btn = document.getElementById('sendCommentBtn');
-            const author = authorInput.value.trim() || 'Аноним';
-            const content = textInput.value.trim();
-            
-            if (!content) {
-                alert('Напишите комментарий');
-                return;
-            }
-
-            if (containsLink(content)) {
-                alert('В комментариях запрещены ссылки');
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = 'Отправка...';
-
-            try {
-                const ip = await getIP();
-                
-                const { error } = await supabase
-                    .from('comments')
-                    .insert([{
-                        news_id: newsId,
-                        author: author,
-                        content: content,
-                        ip: ip
-                    }]);
-
-                if (error) throw error;
-
-                textInput.value = '';
-                loadComments(newsId);
-                btn.textContent = 'Отправлено ✅';
-                setTimeout(() => { btn.textContent = 'Отправить'; btn.disabled = false; }, 2000);
-            } catch (e) {
-                console.error('Ошибка отправки комментария:', e);
-                alert('Не удалось отправить комментарий');
-                btn.textContent = 'Отправить';
-                btn.disabled = false;
-            }
-        }
-
-        async function loadComments(newsId) {
-            const container = document.getElementById('commentsList');
-            if (!container) return;
-            try {
-                const { data, error } = await supabase
-                    .from('comments')
-                    .select('*')
-                    .eq('news_id', newsId)
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-                if (data && data.length > 0) {
-                    let html = '';
-                    data.forEach(comment => {
-                        const time = new Date(comment.created_at).toLocaleString('ru-RU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-                        html += `
-                            <div class="comment">
-                                <span class="comment-author">${comment.author || 'Аноним'}</span>
-                                <span class="comment-time">${time}</span>
-                                <div class="comment-text">${comment.content}</div>
-                            </div>
-                        `;
-                    });
-                    container.innerHTML = html;
-                } else {
-                    container.innerHTML = `<div class="no-comments">Комментариев пока нет. Будьте первым!</div>`;
-                }
-            } catch (e) {
-                console.error('Ошибка загрузки комментариев:', e);
-                container.innerHTML = `<div class="no-comments" style="color:#6a3c3c;">Ошибка загрузки комментариев</div>`;
-            }
-        }
-
-        // ============================================================
-        // 🗳️ ГОЛОСОВАНИЯ
-        // ============================================================
-        let isVotingInProgress = false;
-
-        function renderPoll(pollData) {
-            if (!pollData) return '';
-            const options = pollData.options || [];
-            const votes = pollData.votes || options.map(() => 0);
-            const totalVotes = votes.reduce((a, b) => a + b, 0);
-            const hasVoted = localStorage.getItem('poll_voted_' + pollData.id) === 'true';
-            const images = pollData.images || [];
-            let html = `<div class="poll-container" data-poll-id="${pollData.id}">`;
-            const validImages = images.filter(img => img && img.trim() !== '');
-            if (validImages.length > 0) {
-                html += `<div class="poll-images">${validImages.map(img => `<img src="${img}" alt="Фото" loading="lazy" />`).join('')}</div>`;
-            }
-            html += `
-                <div class="poll-header">
-                    <span class="poll-icon">📊</span>
-                    <span class="poll-question">${pollData.question || 'Голосование'}</span>
-                </div>
-            `;
-            options.forEach((option, index) => {
-                const voteCount = votes[index] || 0;
-                const percent = totalVotes > 0 ? Math.round((voteCount / totalVotes) * 100) : 0;
-                const isSelected = hasVoted && localStorage.getItem('poll_selected_' + pollData.id) === String(index);
-                html += `
-                    <div class="poll-option ${hasVoted ? 'disabled' : ''} ${isSelected ? 'voted' : ''}" 
-                         data-index="${index}" data-poll-id="${pollData.id}" data-voted="${hasVoted ? 'true' : 'false'}">
-                        <div class="poll-bar" style="width:${percent}%;"></div>
-                        <div class="poll-label">
-                            <div class="poll-radio"></div>
-                            <span class="poll-text">${option}</span>
-                            <span class="poll-votes-count">${voteCount} гол.</span>
-                            <span class="poll-percent">${percent}%</span>
-                        </div>
-                    </div>
-                `;
-            });
-            html += `<div class="poll-total">Всего голосов: ${totalVotes}</div>`;
-            if (hasVoted) html += `<div class="poll-message">✅ Вы уже проголосовали</div>`;
-            html += `</div>`;
-            return html;
-        }
-
-        function attachPollHandlers() {
-            document.querySelectorAll('.poll-option:not(.disabled)').forEach(el => {
-                const newEl = el.cloneNode(true);
-                el.parentNode.replaceChild(newEl, el);
-            });
-            document.querySelectorAll('.poll-option:not(.disabled)').forEach(el => {
-                el.addEventListener('click', handlePollClick);
-            });
-            console.log('✅ Обработчики голосования привязаны');
-        }
-
-        async function handlePollClick(e) {
-            const el = this;
-            const pollId = parseInt(el.dataset.pollId);
-            const optionIndex = parseInt(el.dataset.index);
-            
-            if (isVotingInProgress) return;
-            if (localStorage.getItem('poll_voted_' + pollId) === 'true') return;
-
-            isVotingInProgress = true;
-            el.style.opacity = '0.5';
-            el.style.pointerEvents = 'none';
-
-            try {
-                const ip = await getIP();
-
-                const { data: poll, error: fetchError } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .eq('id', pollId)
-                    .single();
-
-                if (fetchError || !poll) throw new Error('Не удалось загрузить голосование');
-
-                const votedIps = poll.voted_ips || [];
-                if (votedIps.includes(ip)) {
-                    alert('Вы уже голосовали в этом опросе (с этого IP)');
-                    isVotingInProgress = false;
-                    el.style.opacity = '1';
-                    el.style.pointerEvents = 'auto';
-                    return;
-                }
-
-                const votes = poll.votes || poll.options.map(() => 0);
-                votes[optionIndex] = (votes[optionIndex] || 0) + 1;
-                votedIps.push(ip);
-
-                const { error: updateError } = await supabase
-                    .from('polls')
-                    .update({ 
-                        votes: votes,
-                        voted_ips: votedIps
-                    })
-                    .eq('id', pollId);
-
-                if (updateError) throw updateError;
-
-                localStorage.setItem('poll_voted_' + pollId, 'true');
-                localStorage.setItem('poll_selected_' + pollId, String(optionIndex));
-
-                const { data: newPoll } = await supabase
-                    .from('polls')
-                    .select('*')
-                    .eq('id', pollId)
-                    .single();
-
-                if (newPoll) {
-                    const container = el.closest('.poll-container');
-                    if (container) {
-                        const newHtml = renderPoll(newPoll);
-                        container.outerHTML = newHtml;
-                        requestAnimationFrame(() => { attachPollHandlers(); });
-                    }
-                }
-            } catch (e) {
-                console.error('Ошибка голосования:', e);
-                alert('Не удалось проголосовать. Попробуйте позже.');
-            } finally {
-                isVotingInProgress = false;
-                el.style.opacity = '1';
-                el.style.pointerEvents = 'auto';
-            }
-        }
-
-        let allPollsData = [];
-
-        async function loadPolls() {
-            const container = document.getElementById('pollsContainer');
-            if (!container) return;
-            try {
-                const { data, error } = await supabase.from('polls').select('*').order('id', { ascending: false });
-                if (error) throw error;
-                allPollsData = data || [];
-                if (data && data.length > 0) {
-                    renderPolls(data);
-                } else {
-                    container.innerHTML = `<div class="empty-news"><span>🗳️</span>Голосований пока нет.<br><small style="color:#555;">Скоро появятся!</small></div>`;
-                }
-            } catch (e) {
-                console.error('Ошибка загрузки голосований:', e);
-                container.innerHTML = `<div class="empty-news" style="border-color:#6a3c3c;"><span>⚠️</span>Ошибка загрузки голосований</div>`;
-            }
-        }
-
-        function renderPolls(pollsArray) {
-            const container = document.getElementById('pollsContainer');
-            if (!container || !pollsArray || pollsArray.length === 0) {
-                container.innerHTML = `<div class="empty-news"><span>🗳️</span>Голосований пока нет.</div>`;
-                return;
-            }
-            let html = '<div class="polls-list">';
-            pollsArray.forEach(poll => {
-                const formattedDate = formatDateShort(poll.created_at);
-                const preview = poll.question ? poll.question.substring(0, 120) + (poll.question.length > 120 ? '...' : '') : '';
-                html += `
-                    <div class="poll-item" data-poll-id="${poll.id}">
-                        <div class="poll-date">${formattedDate}</div>
-                        <div class="poll-content">
-                            <h4>${poll.title || 'Голосование'}</h4>
-                            ${preview ? `<div class="poll-preview">${preview}</div>` : ''}
-                            <div class="poll-vote-btn">Проголосовать →</div>
-                            ${poll.sticker ? `<img src="${poll.sticker}" class="poll-sticker" />` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-            document.querySelectorAll('.poll-item').forEach(el => {
-                el.addEventListener('click', function() {
-                    const id = parseInt(this.dataset.pollId);
-                    const poll = allPollsData.find(p => p.id === id);
-                    if (poll) openPollOverlay(poll);
-                });
-            });
-        }
-
-        const pollOverlay = document.getElementById('pollOverlay');
-        const pollOverlayContent = document.getElementById('pollOverlayContent');
-        const closePollOverlayBtn = document.getElementById('closePollOverlay');
-
-        function renderPollInOverlay(pollData) {
-            return renderPoll(pollData);
-        }
-
-        function openPollOverlay(poll) {
-            const html = renderPollInOverlay(poll);
-            pollOverlayContent.innerHTML = html;
-            pollOverlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => { attachPollHandlers(); }, 150);
-        }
-
-        function closePollOverlay() {
-            pollOverlay.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        closePollOverlayBtn.addEventListener('click', closePollOverlay);
-        pollOverlay.addEventListener('click', function(e) { if (e.target === pollOverlay) closePollOverlay(); });
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && pollOverlay.classList.contains('open')) closePollOverlay(); });
-
-        // ============================================================
-        // 🍔 БУРГЕР
-        // ============================================================
+        // ===== НАВИГАЦИЯ (ХЕШ) =====
         const burger = document.getElementById('burger');
         const dropdown = document.getElementById('dropdownMenu');
-        let isOpen = false;
-        if (burger && dropdown) {
-            function toggleMenu(e) {
-                if (e) { e.preventDefault(); e.stopPropagation(); }
-                isOpen = !isOpen;
-                if (isOpen) {
-                    burger.classList.add('active');
-                    dropdown.classList.add('open');
-                } else {
-                    burger.classList.remove('active');
-                    dropdown.classList.remove('open');
-                }
-            }
-            burger.addEventListener('click', toggleMenu);
-            burger.addEventListener('touchstart', toggleMenu, { passive: false });
-            document.addEventListener('click', function(e) {
-                if (dropdown.contains(e.target) || burger.contains(e.target)) return;
-                if (isOpen) toggleMenu(e);
-            });
-            document.addEventListener('touchstart', function(e) {
-                if (dropdown.contains(e.target) || burger.contains(e.target)) return;
-                if (isOpen) toggleMenu(e);
-            }, { passive: true });
-            document.addEventListener('scroll', function() {
-                if (isOpen) toggleMenu();
-            }, { passive: true });
-        }
-
-        // ============================================================
-        // 🧭 НАВИГАЦИЯ
-        // ============================================================
-        const menuLinks = dropdown ? dropdown.querySelectorAll('a[data-page]') : [];
+        const menuLinks = dropdown.querySelectorAll('a[data-page]');
         const pages = {
             home: document.getElementById('page-home'),
             games: document.getElementById('page-games'),
@@ -1978,45 +321,431 @@
             polls: document.getElementById('page-polls')
         };
 
+        function closeMenu() {
+            burger.classList.remove('active');
+            dropdown.classList.remove('open');
+        }
+        function toggleMenu(e) {
+            e.stopPropagation();
+            burger.classList.toggle('active');
+            dropdown.classList.toggle('open');
+        }
+        burger.addEventListener('click', toggleMenu);
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target) && !burger.contains(e.target)) closeMenu();
+        });
+
+        function navigateHash(path) {
+            if (path.startsWith('/')) path = path.slice(1);
+            window.location.hash = path;
+            routerHash();
+        }
+
+        function routerHash() {
+            closeMenu();
+            const hash = window.location.hash.slice(1) || '';
+            let pageId = 'home';
+
+            if (hash === '' || hash === 'home') {
+                pageId = 'home';
+            } else if (hash === 'games') {
+                pageId = 'games';
+                loadGames();
+            } else if (hash === 'news') {
+                pageId = 'news';
+                loadNews();
+            } else if (hash === 'polls') {
+                pageId = 'polls';
+                loadPolls();
+            } else if (hash.startsWith('game/')) {
+                pageId = 'games';
+                const detailId = hash.split('/')[1];
+                if (allGamesData.length === 0) {
+                    loadGames().then(() => openGameDetail(detailId));
+                } else {
+                    openGameDetail(detailId);
+                }
+            } else if (hash.startsWith('news/')) {
+                pageId = 'news';
+                const detailId = hash.split('/')[1];
+                if (allNewsData.length === 0) {
+                    loadNews().then(() => openNewsDetail(detailId));
+                } else {
+                    openNewsDetail(detailId);
+                }
+            } else if (hash.startsWith('poll/')) {
+                pageId = 'polls';
+                const detailId = hash.split('/')[1];
+                if (allPollsData.length === 0) {
+                    loadPolls().then(() => openPollDetail(detailId));
+                } else {
+                    openPollDetail(detailId);
+                }
+            } else {
+                pageId = 'home';
+            }
+            showPage(pageId);
+        }
+
         function showPage(pageId) {
-            menuLinks.forEach(link => link.classList.remove('active-link'));
-            menuLinks.forEach(link => {
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active-link');
-                }
+            menuLinks.forEach(l => l.classList.remove('active-link'));
+            menuLinks.forEach(l => { if (l.dataset.page === pageId) l.classList.add('active-link'); });
+            Object.keys(pages).forEach(key => {
+                if (pages[key]) pages[key].classList.toggle('active', key === pageId);
             });
-            Object.values(pages).forEach(p => {
-                if (p) {
-                    p.classList.remove('active');
-                    p.style.animation = 'none';
-                    void p.offsetHeight;
-                    p.style.animation = '';
-                }
-            });
-            if (pages[pageId]) pages[pageId].classList.add('active');
-            if (isOpen) toggleMenu();
         }
 
         menuLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                showPage(this.dataset.page);
+                const pageId = link.dataset.page;
+                let hash = '';
+                if (pageId === 'games') hash = 'games';
+                else if (pageId === 'news') hash = 'news';
+                else if (pageId === 'polls') hash = 'polls';
+                else if (pageId === 'home') hash = '';
+                window.location.hash = hash;
+                routerHash();
             });
-            link.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                showPage(this.dataset.page);
-            }, { passive: false });
         });
 
-        // ============================================================
-        // 🚀 ЗАПУСК
-        // ============================================================
-        console.log('Inors Games запущен!');
-        loadGames();
-        loadNews();
-        loadPolls();
-        setTimeout(() => { attachPollHandlers(); }, 1000);
-    });
+        window.addEventListener('hashchange', routerHash);
+
+        // ===== ИГРЫ =====
+        let allGamesData = [];
+        async function loadGames() {
+            const container = document.getElementById('gamesContainer');
+            if(!container) return;
+            container.innerHTML = '<div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка игр...</span></div>';
+            try {
+                const { data, error } = await supabase.from('games').select('*').order('id',{ascending:false});
+                if(error) throw error;
+                allGamesData = data || [];
+                if(data && data.length) renderGames(data);
+                else container.innerHTML = `<div class="empty-news"><span>🎮</span>Игр пока нет.</div>`;
+            } catch(e) { container.innerHTML = `<div class="empty-news">Ошибка загрузки</div>`; }
+        }
+        function renderGames(games) {
+            const container = document.getElementById('gamesContainer');
+            let html = '<div class="games-grid">';
+            games.forEach(game => {
+                const img = game.image_url ? `<img src="${game.image_url}" alt="${game.title}" loading="lazy">` : `<div class="no-image">Фото</div>`;
+                html += `<div class="game-card" data-id="${game.id}">
+                    <div class="game-screenshot">${img}</div>
+                    <div class="game-info">
+                        <div class="game-title">${game.title||'Без названия'}</div>
+                        <div class="game-meta">${game.genre ? `<span class="badge">${game.genre}</span>`:''} ${game.year ? `<span class="year">${game.year}</span>`:''} ${game.platform?`<span>${game.platform}</span>`:''}</div>
+                        <div class="game-description">${game.description||''}</div>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        function openGameDetail(gameId) {
+            const game = allGamesData.find(g => g.id === parseInt(gameId));
+            if(!game) return;
+            const container = document.getElementById('gamesContainer');
+            if(!container) return;
+            container.innerHTML = `
+                <div class="breadcrumb"><a data-action="back-games"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Назад</a></div>
+                <div class="detail-title">${game.title}</div>
+                ${game.image_url ? `<img src="${game.image_url}" class="detail-image" alt="${game.title}">`:''}
+                <div class="detail-meta">${game.genre?`<span class="badge">${game.genre}</span>`:''} ${game.year?`<span class="year">${game.year}</span>`:''} ${game.platform?`<span>${game.platform}</span>`:''}</div>
+                <div class="detail-content">${game.description ? game.description.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('') : ''}</div>
+                <div class="share-buttons">
+                    <button class="share-btn" data-share="game" data-id="${game.id}">🔗 Поделиться</button>
+                    ${game.download_link ? `<a href="${game.download_link}" target="_blank" class="share-btn">⬇️ Скачать</a>`:''}
+                </div>
+            `;
+        }
+
+        // ===== НОВОСТИ (с модерацией комментариев) =====
+        let allNewsData = [];
+        async function loadNews() {
+            const container = document.getElementById('newsContainer');
+            if(!container) return;
+            container.innerHTML = '<div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка новостей...</span></div>';
+            try {
+                const { data, error } = await supabase.from('news').select('*').order('date',{ascending:false});
+                if(error) throw error;
+                allNewsData = data || [];
+                if(data && data.length) renderNews(data);
+                else container.innerHTML = `<div class="empty-news"><span>📭</span>Новостей пока нет.</div>`;
+            } catch(e) { container.innerHTML = `<div class="empty-news">Ошибка загрузки</div>`; }
+        }
+        function renderNews(news) {
+            const container = document.getElementById('newsContainer');
+            let html = '<div class="news-list">';
+            news.forEach(item => {
+                const preview = item.content ? item.content.substring(0,120)+ (item.content.length>120?'...':'') : '';
+                html += `<div class="news-item" data-id="${item.id}">
+                    <div class="news-date">${formatDateShort(item.date)}</div>
+                    <div class="news-content">
+                        <h4>${item.title||'Без названия'}</h4>
+                        ${preview?`<div class="news-preview">${preview}</div>`:''}
+                        <div class="read-more">Читать полностью →</div>
+                        ${item.image_url ? `<img src="${item.image_url}" class="news-image" loading="lazy">`:''}
+                        ${item.sticker ? `<img src="${item.sticker}" class="news-sticker">`:''}
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        async function openNewsDetail(newsId) {
+            const news = allNewsData.find(n => n.id === parseInt(newsId));
+            if(!news) return;
+            const container = document.getElementById('newsContainer');
+            if(!container) return;
+            container.innerHTML = `
+                <div class="breadcrumb"><a data-action="back-news"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Назад</a></div>
+                <div class="detail-title">${news.title}</div>
+                <span style="color:#6a8cff; font-size:0.85rem;">${formatDate(news.date)}</span>
+                ${news.image_url ? `<img src="${news.image_url}" class="detail-image" alt="${news.title}">`:''}
+                ${news.sticker ? `<img src="${news.sticker}" style="max-width:80px;border-radius:8px;margin-bottom:10px;">`:''}
+                <div class="detail-content">${(news.content||'').split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('')}</div>
+                <div class="share-buttons">
+                    <button class="share-btn" data-share="news" data-id="${news.id}">🔗 Поделиться</button>
+                </div>
+                <div class="comments-section">
+                    <div class="comments-title">Комментарии</div>
+                    <div id="commentsList"></div>
+                    <div class="comment-form">
+                        <div class="form-row"><input type="text" id="commentAuthor" placeholder="Ваше имя" maxlength="30"></div>
+                        <textarea id="commentText" placeholder="Напишите комментарий..." rows="2"></textarea>
+                        <button class="comment-btn" id="sendCommentBtn">Отправить</button>
+                    </div>
+                </div>
+            `;
+            loadComments(news.id);
+            document.getElementById('sendCommentBtn').addEventListener('click', () => sendComment(news.id));
+            try {
+                const { data: pollData } = await supabase.from('polls').select('*').eq('news_id', news.id).single();
+                if(pollData) { 
+                    const pollHtml = renderPoll(pollData);
+                    container.insertAdjacentHTML('beforeend', pollHtml);
+                }
+            } catch(e) {}
+        }
+
+        // ===== КОММЕНТАРИИ (с модерацией) =====
+        async function sendComment(newsId) {
+            const authorInput = document.getElementById('commentAuthor');
+            const textInput = document.getElementById('commentText');
+            const btn = document.getElementById('sendCommentBtn');
+            if (!authorInput || !textInput || !btn) return;
+            if (btn.disabled) return;
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+            try {
+                let author = authorInput.value.trim() || 'Аноним';
+                let content = textInput.value.trim();
+                if (author.length > 30) { alert('Имя не длиннее 30 символов'); return; }
+                if (content.length > 1000) { alert('Комментарий не длиннее 1000 символов'); return; }
+                if (!content) { alert('Напишите комментарий'); return; }
+                if (containsLink(content)) { alert('Ссылки запрещены'); return; }
+                const ip = await getIP();
+                // КОММЕНТАРИЙ ОТПРАВЛЯЕТСЯ СО СТАТУСОМ 'pending'
+                const { error } = await supabase.from('comments').insert([
+                    { news_id: newsId, author, content, ip, status: 'pending' }
+                ]);
+                if (error) throw error;
+                textInput.value = '';
+                alert('Комментарий отправлен на модерацию');
+            } catch (e) {
+                alert('Ошибка: ' + e.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Отправить';
+            }
+        }
+
+        // ЗАГРУЖАЕМ ТОЛЬКО ОДОБРЕННЫЕ КОММЕНТАРИИ
+        async function loadComments(newsId) {
+            const container = document.getElementById('commentsList');
+            if(!container) return;
+            try {
+                const { data, error } = await supabase
+                    .from('comments')
+                    .select('*')
+                    .eq('news_id', newsId)
+                    .eq('status', 'approved')
+                    .order('created_at', { ascending: false });
+                if(error) throw error;
+                if(data && data.length) {
+                    let html = '';
+                    data.forEach(c => {
+                        const time = new Date(c.created_at).toLocaleString('ru-RU',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+                        html += `<div class="comment"><span class="comment-author">${c.author||'Аноним'}</span><span class="comment-time">${time}</span><div class="comment-text">${c.content}</div></div>`;
+                    });
+                    container.innerHTML = html;
+                } else container.innerHTML = `<div class="no-comments">Комментариев пока нет</div>`;
+            } catch(e) { container.innerHTML = `<div class="no-comments">Ошибка</div>`; }
+        }
+
+        // ===== ГОЛОСОВАНИЯ =====
+        let allPollsData = [];
+        let isVotingInProgress = false;
+        function renderPoll(pollData) {
+            if(!pollData) return '';
+            const options = pollData.options || [];
+            const votes = pollData.votes || options.map(()=>0);
+            const totalVotes = votes.reduce((a,b)=>a+b,0);
+            const hasVoted = localStorage.getItem('poll_voted_'+pollData.id)==='true';
+            let html = `<div class="poll-container" data-poll-id="${pollData.id}">`;
+            const validImages = (pollData.images||[]).filter(img=>img);
+            if(validImages.length) html += `<div style="display:flex;gap:10px;margin-bottom:12px;">${validImages.map(img=>`<img src="${img}" style="max-width:100%;max-height:180px;border-radius:10px;">`).join('')}</div>`;
+            html += `<div class="poll-header"><span class="poll-icon">📊</span><span class="poll-question">${pollData.question||'Голосование'}</span></div>`;
+            options.forEach((option, index) => {
+                const voteCount = votes[index]||0;
+                const percent = totalVotes ? Math.round((voteCount/totalVotes)*100) : 0;
+                const selected = hasVoted && localStorage.getItem('poll_selected_'+pollData.id)===String(index);
+                html += `<div class="poll-option ${hasVoted?'disabled':''} ${selected?'voted':''}" data-poll-id="${pollData.id}" data-option-index="${index}">
+                    <div class="poll-bar" style="width:${percent}%;"></div>
+                    <div class="poll-label"><div class="poll-radio"></div><span class="poll-text">${option}</span><span class="poll-votes-count">${voteCount} гол.</span><span class="poll-percent">${percent}%</span></div>
+                </div>`;
+            });
+            html += `<div class="poll-total">Всего голосов: ${totalVotes}</div>${hasVoted?'<div class="poll-message">✅ Вы уже проголосовали</div>':''}</div>`;
+            return html;
+        }
+        async function votePoll(pollId, optionIndex) {
+            if(isVotingInProgress || localStorage.getItem('poll_voted_'+pollId)==='true') return;
+            isVotingInProgress = true;
+            try {
+                const ip = await getIP();
+                const { data: poll, error: fetchError } = await supabase.from('polls').select('*').eq('id', pollId).single();
+                if(fetchError || !poll) throw new Error('Ошибка загрузки');
+                const votedIps = poll.voted_ips || [];
+                if(votedIps.includes(ip)) { alert('Вы уже голосовали'); return; }
+                const votes = poll.votes || poll.options.map(()=>0);
+                votes[optionIndex] = (votes[optionIndex]||0)+1;
+                votedIps.push(ip);
+                const { error: updateError } = await supabase.from('polls').update({votes, voted_ips: votedIps}).eq('id', pollId);
+                if(updateError) throw updateError;
+                localStorage.setItem('poll_voted_'+pollId,'true');
+                localStorage.setItem('poll_selected_'+pollId, String(optionIndex));
+                const { data: newPoll } = await supabase.from('polls').select('*').eq('id', pollId).single();
+                if(newPoll) {
+                    const container = document.querySelector(`[data-poll-id="${pollId}"]`);
+                    if(container) container.outerHTML = renderPoll(newPoll);
+                }
+            } catch(e) { alert('Ошибка голосования'); } finally { isVotingInProgress = false; }
+        }
+        async function loadPolls() {
+            const container = document.getElementById('pollsContainer');
+            if(!container) return;
+            container.innerHTML = '<div class="empty-news"><div class="spinner"></div><span style="font-size:1rem; margin-top:10px;">Загрузка голосований...</span></div>';
+            try {
+                const { data, error } = await supabase.from('polls').select('*').order('id',{ascending:false});
+                if(error) throw error;
+                allPollsData = data || [];
+                if(data && data.length) renderPolls(data);
+                else container.innerHTML = `<div class="empty-news"><span>🗳️</span>Голосований пока нет.</div>`;
+            } catch(e) { container.innerHTML = `<div class="empty-news">Ошибка</div>`; }
+        }
+        function renderPolls(polls) {
+            const container = document.getElementById('pollsContainer');
+            let html = '<div class="polls-list">';
+            polls.forEach(poll => {
+                const preview = poll.question ? poll.question.substring(0,120)+(poll.question.length>120?'...':'') : '';
+                html += `<div class="poll-item" data-id="${poll.id}">
+                    <div class="poll-date">${formatDateShort(poll.created_at)}</div>
+                    <div class="poll-content">
+                        <h4>${poll.title||'Голосование'}</h4>
+                        ${preview?`<div class="poll-preview">${preview}</div>`:''}
+                        <div class="poll-vote-btn">Проголосовать →</div>
+                        ${poll.sticker ? `<img src="${poll.sticker}" class="poll-sticker">`:''}
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        function openPollDetail(pollId) {
+            const poll = allPollsData.find(p => p.id === parseInt(pollId));
+            if(!poll) return;
+            const container = document.getElementById('pollsContainer');
+            if(!container) return;
+            container.innerHTML = `
+                <div class="breadcrumb"><a data-action="back-polls"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Назад</a></div>
+                <div class="detail-title">${poll.title||'Голосование'}</div>
+                ${renderPoll(poll)}
+                <div class="share-buttons"><button class="share-btn" data-share="poll" data-id="${poll.id}">🔗 Поделиться</button></div>
+            `;
+        }
+
+        // ===== ПОДЕЛИТЬСЯ =====
+        function shareContent(type, id) {
+            const baseUrl = window.location.origin + window.location.pathname;
+            let url = baseUrl + '#' + type + '/' + id;
+            if(navigator.share) {
+                navigator.share({ title: 'Inors Games', url: url }).catch(()=>{});
+            } else {
+                navigator.clipboard?.writeText(url).then(()=>{
+                    alert('Ссылка скопирована: ' + url);
+                }).catch(()=>{
+                    prompt('Скопируйте ссылку:', url);
+                });
+            }
+        }
+
+        // ===== ДЕЛЕГИРОВАНИЕ =====
+        document.addEventListener('click', (e) => {
+            const gameCard = e.target.closest('.game-card[data-id]');
+            if(gameCard) {
+                const id = gameCard.dataset.id;
+                window.location.hash = 'game/' + id;
+                routerHash();
+                return;
+            }
+            const newsItem = e.target.closest('.news-item[data-id]');
+            if(newsItem) {
+                const id = newsItem.dataset.id;
+                window.location.hash = 'news/' + id;
+                routerHash();
+                return;
+            }
+            const pollItem = e.target.closest('.poll-item[data-id]');
+            if(pollItem) {
+                const id = pollItem.dataset.id;
+                window.location.hash = 'poll/' + id;
+                routerHash();
+                return;
+            }
+            const backBtn = e.target.closest('[data-action^="back-"]');
+            if(backBtn) {
+                const action = backBtn.dataset.action;
+                if(action === 'back-games') { window.location.hash = 'games'; routerHash(); }
+                else if(action === 'back-news') { window.location.hash = 'news'; routerHash(); }
+                else if(action === 'back-polls') { window.location.hash = 'polls'; routerHash(); }
+                return;
+            }
+            const shareBtn = e.target.closest('[data-share]');
+            if(shareBtn) {
+                const type = shareBtn.dataset.share;
+                const id = shareBtn.dataset.id;
+                shareContent(type, id);
+                return;
+            }
+            const pollOption = e.target.closest('.poll-option[data-poll-id][data-option-index]');
+            if(pollOption && !pollOption.classList.contains('disabled')) {
+                const pollId = pollOption.dataset.pollId;
+                const optionIndex = parseInt(pollOption.dataset.optionIndex);
+                votePoll(pollId, optionIndex);
+                return;
+            }
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        function init() {
+            loadGames();
+            loadNews();
+            loadPolls();
+            routerHash();
+        }
+        init();
+    })();
 </script>
 </body>
 </html>
